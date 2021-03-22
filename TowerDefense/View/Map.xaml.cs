@@ -25,28 +25,23 @@ namespace TowerDefense.View
         }
         private void initiateGrid()
         {
-            int numberOfColumn = 10;
-            for (int i = 0; i < numberOfColumn; i++)
+            Grid myGrid = new Grid();
+            myGrid.Width = 250;
+            myGrid.Height = 100;
+            myGrid.HorizontalAlignment = HorizontalAlignment.Left;
+            myGrid.VerticalAlignment = VerticalAlignment.Top;
+            myGrid.ShowGridLines = true;
+            for (int i = 0; i < 5; i++)
             {
-                ColumnDefinition c1 = new ColumnDefinition();
-                c1.Width = new GridLength(1, GridUnitType.Star);
-                TheGrid.ColumnDefinitions.Add(c1);
-            }
-            for (int j = 0; j < (numberOfColumn / 5) + 1; j++)
-            {
-                RowDefinition r1 = new RowDefinition();
-                TheGrid.RowDefinitions.Add(r1);
-                for (int i = 0; i < numberOfColumn; i++)
-                {
-                    TextBlock tb = new TextBlock();
-                    tb.FontSize = 20;
-                    tb.VerticalAlignment = VerticalAlignment.Top;
-                    tb.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    tb.Text = string.Format("Text row {0}, column {1}", j, i);
-                    TheGrid.Children.Add(tb);
-                    Grid.SetColumn(tb, i);
-                    Grid.SetRow(tb, j);
-                }
+                ColumnDefinition colDef = new ColumnDefinition();
+                RowDefinition rowDef = new RowDefinition();
+                myGrid.RowDefinitions.Add(rowDef);
+                myGrid.ColumnDefinitions.Add(colDef);
+                TextBlock txt = new TextBlock();
+                txt.Text = i.ToString();
+                txt.FontSize = 20;
+                txt.FontWeight = FontWeights.Bold;
+                Grid.SetRow(txt, i);
             }
         }
 
