@@ -7,10 +7,6 @@ namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
-        public int GridSize
-        {
-            get { return 10; }
-        }
         public void LoadRoute()
         {
             Route.Add(5.1);
