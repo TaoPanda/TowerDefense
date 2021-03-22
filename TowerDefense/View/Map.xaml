@@ -8,9 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Map">
 
-    <Grid x:Name="TheGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1"/>
-        </Grid.RowDefinitions>
+    <Grid x:Name="myGrid">
+        
     </Grid>
 </Page>

@@ -6,8 +6,6 @@
         xmlns:local="clr-namespace:TowerDefense"
         xmlns:views = "clr-namespace:TowerDefense.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <views:Map x:Name="MapViewControl"/>
-    </Grid>
+        Title="MainWindow" Height="500" Width="800">
+    <views:Map x:Name="MapViewControl"/>
 </Window>
