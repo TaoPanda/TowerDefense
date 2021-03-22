@@ -37,13 +37,7 @@ namespace TowerDefense.View
                 RowDefinition rowDef = new RowDefinition();
                 myGrid.RowDefinitions.Add(rowDef);
                 myGrid.ColumnDefinitions.Add(colDef);
-                TextBlock txt = new TextBlock
-                {
-                    Text = i.ToString(),
-                    FontSize = 20,
-                    FontWeight = FontWeights.Bold
-                };
-                Grid.SetRow(txt, i);
+                
             }
         }
 
