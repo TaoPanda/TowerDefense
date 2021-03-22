@@ -18,7 +18,9 @@ namespace TowerDefense.ViewModel
             int x = Convert.ToInt32(Math.Floor(cordinat));
             float s = cordinat - x;
             int y = 0;
-            while(y != s)
+            float half = cellSize / 2;
+            int roundhalf = Convert.ToInt32(Math.Round(half));
+            while (y != s)
             {
                 try
                 {
@@ -29,7 +31,7 @@ namespace TowerDefense.ViewModel
                     s = s * 10;
                 }
             }
-            Array cords = new Array[x*cellSize,y*cellSize];
+            Array cords = new Array[x * cellSize + roundhalf, y * cellSize + roundhalf];
             return cords;
         }
     }
