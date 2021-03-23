@@ -25,7 +25,10 @@ namespace TowerDefense.ViewModel
         }
         private void GenerateRoute()
         {
-
+            foreach (double element in Route)
+            {
+                
+            }
 
         }
 
