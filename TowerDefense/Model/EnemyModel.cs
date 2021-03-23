@@ -24,5 +24,10 @@ namespace TowerDefense.Model
             this.cost = cost;
             this.color = color;
         }
+
+        public void NextPosition()
+        {
+            position++;
+        }
     }
 }
