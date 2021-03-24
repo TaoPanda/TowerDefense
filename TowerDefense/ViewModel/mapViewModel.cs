@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using TowerDefense.Model;
 using System.Text;
+using TowerDefense.Model;
 
 namespace TowerDefense.ViewModel
 {
@@ -59,6 +60,29 @@ namespace TowerDefense.ViewModel
             int y = int.Parse(parts[1]);
             int[] cords = new[] { x * cellSize, y * cellSize};
             return cords;
+        }
+
+        private void MoveEnemyInList(ObservableCollection<EnemyModel> enemies, ObservableCollection<double> route, int cellSize)
+        {
+            List<int> removeIndex = new List<int>();
+            int remove = 0;
+            foreach(EnemyModel enemy in enemies)
+            {
+                enemy.NextPosition();
+                if(enemy.position != route.Count)
+                {
+                    enemy.cordinates = GetCenterOfCell(route[enemy.position], cellSize);
+                }
+                else
+                {
+                    removeIndex.Add(remove);
+                }
+                remove++;
+            }
+            foreach(int index in removeIndex)
+            {
+                enemies.RemoveAt(index);
+            }
         }
     }
 }
