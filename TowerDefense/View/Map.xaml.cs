@@ -16,7 +16,7 @@ namespace TowerDefense.View
     /// <summary>
     /// Interaction logic for Map.xaml
     /// </summary>
-    public partial class Map : Page
+    public partial class Map : UserControl
     {
         public Map()
         {
