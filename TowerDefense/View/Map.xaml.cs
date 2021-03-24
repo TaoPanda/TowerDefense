@@ -16,32 +16,28 @@ namespace TowerDefense.View
     /// <summary>
     /// Interaction logic for Map.xaml
     /// </summary>
-    public partial class Map : Page
+    public partial class Map : UserControl
     {
         public Map()
         {
             InitializeComponent();
-            initiateGrid();
+            InitiateGrid();
+                    
         }
-        private void initiateGrid()
+        private void InitiateGrid()
         {
-            Grid myGrid = new Grid();
-            myGrid.Width = 250;
-            myGrid.Height = 100;
+            myGrid.Width = 500;
+            myGrid.Height = 500;
             myGrid.HorizontalAlignment = HorizontalAlignment.Left;
             myGrid.VerticalAlignment = VerticalAlignment.Top;
             myGrid.ShowGridLines = true;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
                 RowDefinition rowDef = new RowDefinition();
                 myGrid.RowDefinitions.Add(rowDef);
                 myGrid.ColumnDefinitions.Add(colDef);
-                TextBlock txt = new TextBlock();
-                txt.Text = i.ToString();
-                txt.FontSize = 20;
-                txt.FontWeight = FontWeights.Bold;
-                Grid.SetRow(txt, i);
+                
             }
         }
 
