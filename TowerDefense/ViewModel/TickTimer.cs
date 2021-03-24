@@ -17,7 +17,7 @@ public class TickTimer
 
     public void startGame()
     {
-		timer.Interval = TimeSpan.FromSeconds(1);
+		timer.Interval = TimeSpan.FromMilliseconds(250);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}

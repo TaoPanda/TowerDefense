@@ -31,7 +31,7 @@ namespace TowerDefense.View
             myGrid.HorizontalAlignment = HorizontalAlignment.Left;
             myGrid.VerticalAlignment = VerticalAlignment.Top;
             myGrid.ShowGridLines = true;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();
                 RowDefinition rowDef = new RowDefinition();

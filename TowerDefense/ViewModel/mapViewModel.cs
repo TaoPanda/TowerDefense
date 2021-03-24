@@ -38,8 +38,28 @@ namespace TowerDefense.ViewModel
             Route.Add("3.7");
             Route.Add("3.8");
             Route.Add("3.9");
-
-
+            Route.Add("4.9");
+            Route.Add("5.9");
+            Route.Add("6.9");
+            Route.Add("7.9");
+            Route.Add("8.9");
+            Route.Add("9.9");
+            Route.Add("10.9");
+            Route.Add("11.9");
+            Route.Add("11.10");
+            Route.Add("11.11");
+            Route.Add("11.12");
+            Route.Add("11.13");
+            Route.Add("11.14");
+            Route.Add("10.14");
+            Route.Add("9.14");
+            Route.Add("8.14");
+            Route.Add("7.14");
+            Route.Add("7.15");
+            Route.Add("7.16");
+            Route.Add("7.17");
+            Route.Add("7.18");
+            Route.Add("7.19");
             GenerateRoute();
         }
 
@@ -51,7 +71,7 @@ namespace TowerDefense.ViewModel
         {
             foreach (string element in Route)
             {
-               int[] cords = GetCenterOfCell(element, 50);
+               int[] cords = GetCenterOfCell(element, 25);
 
                 PositionRoute.Add(new Coordinates(cords[1], cords[0]));
             }

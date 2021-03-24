@@ -31,7 +31,14 @@ namespace TowerDefense.Model
         
         public int Cost { get => cost; set => cost = value; }
         public string Color { get => color; set => color = value; }
-        public Coordinates Cordinate { get => cordinate; set => cordinate = value; }
+        public Coordinates Cordinate { get => cordinate; set { 
+                if(Cordinate != value)
+                {
+                    cordinate = value;
+                    RaisePropertyChanged("Cordinate");
+                }
+            } 
+        }
 
         public EnemyModel(string name, int hp, int ms, int xp, int cost, string color, Coordinates coordinates)
         {
