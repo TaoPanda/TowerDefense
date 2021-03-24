@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using TowerDefense.Model;
 using System.Text;
-using TowerDefense.Model;
 
 namespace TowerDefense.ViewModel
 {
@@ -71,7 +70,7 @@ namespace TowerDefense.ViewModel
                 enemy.NextPosition();
                 if(enemy.position != route.Count)
                 {
-                    enemy.cordinates = GetCenterOfCell(route[enemy.position], cellSize);
+                    enemy.cordinates = GetCenterOfCell(Convert.ToString(route[enemy.position]), cellSize);
                 }
                 else
                 {
