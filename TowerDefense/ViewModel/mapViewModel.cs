@@ -9,11 +9,16 @@ namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
+        private ObservableCollection<EnemyModel> activeEnemies = new ObservableCollection<EnemyModel>();
         private ObservableCollection<string> Route = new ObservableCollection<string>();
         private ObservableCollection<Coordinates> positionRoute = new ObservableCollection<Coordinates>();
+        private TickTimer Tick;
         public MapViewModel(){
+            Tick = new TickTimer(this);
             LoadRoute();
-            }
+            ActiveEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0]));
+            Tick.startGame();
+        }
         public void LoadRoute()
         {
             Route.Add("2.0");
@@ -40,6 +45,7 @@ namespace TowerDefense.ViewModel
 
         public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
         public ObservableCollection<Coordinates> PositionRoute { get => positionRoute; set => positionRoute = value; }
+        public ObservableCollection<EnemyModel> ActiveEnemies { get => activeEnemies; set => activeEnemies = value; }
 
         private void GenerateRoute()
         {
@@ -61,16 +67,16 @@ namespace TowerDefense.ViewModel
             return cords;
         }
 
-        private void MoveEnemyInList(ObservableCollection<EnemyModel> enemies, ObservableCollection<double> route, int cellSize)
+        public void MoveEnemyInList()
         {
             List<int> removeIndex = new List<int>();
             int remove = 0;
-            foreach(EnemyModel enemy in enemies)
+            foreach(EnemyModel enemy in ActiveEnemies)
             {
                 enemy.NextPosition();
-                if(enemy.position != route.Count)
+                if(enemy.Position != PositionRoute.Count)
                 {
-                    enemy.cordinates = GetCenterOfCell(Convert.ToString(route[enemy.position]), cellSize);
+                    enemy.Cordinate = positionRoute[enemy.Position];
                 }
                 else
                 {
@@ -80,7 +86,7 @@ namespace TowerDefense.ViewModel
             }
             foreach(int index in removeIndex)
             {
-                enemies.RemoveAt(index);
+                ActiveEnemies.RemoveAt(index);
             }
         }
     }

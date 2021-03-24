@@ -2,16 +2,22 @@
 using System.Timers;
 using System.Collections.ObjectModel;
 using System.Threading;
-using TowerDefense.Model;
 using System.Windows.Threading;
+using TowerDefense.ViewModel;
 
 public class TickTimer
 {
 	private DispatcherTimer timer = new DispatcherTimer();
-
-	public void startGame()
+    private MapViewModel MapView;
+    public TickTimer(MapViewModel mapView)
     {
-		timer.Interval = new TimeSpan(60000);
+        MapView = mapView;
+    }
+
+
+    public void startGame()
+    {
+		timer.Interval = TimeSpan.FromSeconds(1);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}
@@ -21,7 +27,7 @@ public class TickTimer
     }
     public void Timer_Tick(object sender, EventArgs args)
     {
-       
+        MapView.MoveEnemyInList();
     }
 
         /*

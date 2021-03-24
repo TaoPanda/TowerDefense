@@ -13,7 +13,7 @@
     </UserControl.DataContext>
 
     <Canvas x:Name="myCanvas">
-        
+
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -31,6 +31,23 @@
                 </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+        <ItemsControl ItemsSource = "{Binding Path = ActiveEnemies, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Rectangle
+                                Width="50"
+                                Height="50"
+                                Fill="Red"
+                                Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged}"
+                                Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged}"    >
+                        </Rectangle>
+                    </Canvas>
+
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <Grid x:Name="myGrid">
         </Grid>
 
