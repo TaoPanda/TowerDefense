@@ -13,6 +13,7 @@ namespace TowerDefense.ViewModel
         private ObservableCollection<string> Route = new ObservableCollection<string>();
         private ObservableCollection<Coordinates> positionRoute = new ObservableCollection<Coordinates>();
         private TickTimer Tick;
+        private UIViewModel UI = new UIViewModel();
         public MapViewModel(){
             Tick = new TickTimer(this);
             LoadRoute();
@@ -101,6 +102,7 @@ namespace TowerDefense.ViewModel
                 else
                 {
                     removeIndex.Add(remove);
+                    UI.HealthLoss();
                 }
                 remove++;
             }
