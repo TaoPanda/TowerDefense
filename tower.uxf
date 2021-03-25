@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2492</x>
+      <y>329</y>
+      <w>483</w>
+      <h>357</h>
+    </coordinates>
+    <panel_attributes>Model</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2821</x>
+      <y>364</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Map&gt;&gt;
+--
+/Route : List&lt;double&gt;
++towerEnv : List&lt;double&gt;
++activeEnemy : List&lt;Enemy&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2667</x>
+      <y>413</y>
+      <w>168</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2576</x>
+      <y>469</y>
+      <w>21</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>2590</x>
+      <y>462</y>
+      <w>35</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>0..*
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>2660</x>
+      <y>399</y>
+      <w>35</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>0..*
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>2590</x>
+      <y>490</y>
+      <w>35</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>1
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>2786</x>
+      <y>399</y>
+      <w>35</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>1
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2492</x>
+      <y>700</y>
+      <w>504</w>
+      <h>336</h>
+    </coordinates>
+    <panel_attributes>ViewModel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2814</x>
+      <y>504</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>Player
+--
++name : string
++coins : int
++hp : int
++round : int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2520</x>
+      <y>728</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
+Package::FatClass
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2527</x>
+      <y>532</y>
+      <w>147</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Tower
+--
+/name : string
++range : int
++dmg : int
++fr : int
+/cost : int
++lvl : int
++xp : int
+/size : int 
+/targeting : bool
+/Color : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2527</x>
+      <y>378</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enemy&gt;&gt;
+--
+/Name : string
++HP : int
+/MS : int
+/XP : int 
++Position : int
+/Cost : int
+/Color : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2093</x>
+      <y>616</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;tickViewModel&gt;&gt;
+--
+
+--
+startGame() : void
+pauseGame() : void
+tick() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2002</x>
+      <y>434</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;towerViewModel&gt;&gt;
+--
+activeTowers : list&lt;tower&gt;
+--
+checkTowerRange() : bool
+attackEnemy(Enemy) : void
+checkHealth(Enemy) : bool
+checkRemainingEnemies() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2156</x>
+      <y>434</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enemyViewModel&gt;&gt;
+--
+activeEnemy : list&lt;enemy&gt;
+--
+moveEnemy(int : position) : void
+reachedEnd() : bool
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2156</x>
+      <y>266</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;EnemyModel&gt;&gt;
+--
++Name : string
++HP : int
++MS : int
++XP : int 
++Position : int
++Cost : int
++Color : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2002</x>
+      <y>266</y>
+      <w>147</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;TowerModel&gt;&gt;
+--
++name : string
++range : int
++dmg : int
++fr : int
++cost : int
++lvl : int
++xp : int
++size : int 
++Color : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2065</x>
+      <y>525</y>
+      <w>112</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;140.0;90.0;140.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2156</x>
+      <y>525</y>
+      <w>98</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;120.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2226</x>
+      <y>357</y>
+      <w>21</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2065</x>
+      <y>378</y>
+      <w>21</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2310</x>
+      <y>616</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UIViewModel&gt;&gt;
+--
+-hearts: int 
+-coins: int
+--
+checkHearts() : void
+gameOver() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2296</x>
+      <y>476</y>
+      <w>105</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0;130.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2093</x>
+      <y>756</y>
+      <w>147</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Map view&gt;&gt;
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2310</x>
+      <y>756</y>
+      <w>147</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI view&gt;&gt;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1904</x>
+      <y>525</y>
+      <w>203</w>
+      <h>273</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>270.0;370.0;10.0;370.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2317</x>
+      <y>777</y>
+      <w>84</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;boundary&gt;&gt;
+--
+Start game button</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2233</x>
+      <y>651</y>
+      <w>98</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;200.0;120.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2387</x>
+      <y>707</y>
+      <w>21</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2156</x>
+      <y>707</y>
+      <w>21</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1918</x>
+      <y>525</y>
+      <w>189</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0;250.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1841</x>
+      <y>434</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;mapViewModel&gt;&gt;
+--
+route: list&lt;double&gt;
+--
+generateBasicMap() : void
+generateRoute() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2317</x>
+      <y>819</y>
+      <w>84</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;boundary&gt;&gt;
+--
+Start next wave</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1680</x>
+      <y>434</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;spawnViewModel&gt;&gt;
+--
+ nextWaveEnemies: list&lt;Enemy&gt;
+--
+randomTickVal() : int
+spawnEnemy() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1722</x>
+      <y>525</y>
+      <w>609</w>
+      <h>329</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;450.0;850.0;450.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>602</x>
+      <y>595</y>
+      <w>252</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;tickViewModel&gt;&gt;
+--
+-timer : DispatcherTimer
+-MapView : MapViewModel
+--
++startGame() : void
+-gameOver() : void
++Timer_Tick(sender : object, args : EventArgs) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>392</x>
+      <y>189</y>
+      <w>196</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;EnemyModel&gt;&gt;
+--
++Name : string
++HP : int
++MS : int
++XP : int 
++Position : int
++Cost : int
++Color : string
++Cordinate : Coordinates
+--
++NextPosition : void
+-RaisePropertyChanged(property : string)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>189</x>
+      <y>287</y>
+      <w>147</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;TowerModel&gt;&gt;
+--
++name : string
++range : int
++dmg : int
++fr : int
++cost : int
++lvl : int
++xp : int
++size : int 
++Color : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>917</x>
+      <y>588</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UIViewModel&gt;&gt;
+--
++PlayerData : PlayerDataModel
+--
++UIViewModel : void
++HeathLoss : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>427</x>
+      <y>756</y>
+      <w>147</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Map view&gt;&gt;
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>875</x>
+      <y>728</y>
+      <w>196</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI view&gt;&gt;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>882</x>
+      <y>756</y>
+      <w>84</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;boundary&gt;&gt;
+--
+Start game button</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>994</x>
+      <y>679</y>
+      <w>21</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>406</x>
+      <y>413</y>
+      <w>245</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;mapViewModel&gt;&gt;
+--
+activeEnemies : ObservableCollection&lt;EnemyModel&gt;
+route : ObservableCollection&lt;string&gt;
+positionRoute : ObservableCollection&lt;Coordinates&gt;
+Tick : TickTimer
+UI : UIViewModel
+
+--
++LoadRoute : void
+-GenerateRoute : void
+-GetCenterOfCell(cordinat : string, cellSize : int) : int[]
++MoveEnemyInList : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>882</x>
+      <y>798</y>
+      <w>84</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;boundary&gt;&gt;
+--
+Start next wave</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>189</x>
+      <y>413</y>
+      <w>147</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;spawnViewModel&gt;&gt;
+--
+ nextWaveEnemies: list&lt;Enemy&gt;
+--
+randomTickVal() : int
+spawnEnemy() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>980</x>
+      <y>756</y>
+      <w>84</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;boundary&gt;&gt;
+--
+spawn tower</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>931</x>
+      <y>245</y>
+      <w>189</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;playerDataModel&gt;&gt;
+--
++hp : int
++coins : int
++round : int
+--
++PlayerDataModel(hp : int, coins : int)
+-RaisePropertyChanged(property : string)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1001</x>
+      <y>336</y>
+      <w>21</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;360.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>644</x>
+      <y>483</y>
+      <w>273</w>
+      <h>259</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>370.0;350.0;370.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>553</x>
+      <y>98</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;CoordinatesModel&gt;&gt;
+--
++y : int
++x : int
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>133</y>
+      <w>21</w>
+      <h>294</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;400.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>581</x>
+      <y>231</y>
+      <w>56</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>462</x>
+      <y>329</y>
+      <w>21</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>644</x>
+      <y>462</y>
+      <w>350</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;480.0;10.0;480.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>546</y>
+      <w>21</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;300.0;10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>644</x>
+      <y>518</y>
+      <w>91</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;110.0</additional_attributes>
+  </element>
+</diagram>
