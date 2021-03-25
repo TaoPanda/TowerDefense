@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TowerDefense.View
@@ -15,7 +16,7 @@ namespace TowerDefense.View
     /// <summary>
     /// Interaction logic for UIView.xaml
     /// </summary>
-    public partial class UIView : Window
+    public partial class UIView : UserControl
     {
         public UIView()
         {

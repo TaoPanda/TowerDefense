@@ -67,6 +67,7 @@ namespace TowerDefense.ViewModel
         public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
         public ObservableCollection<Coordinates> PositionRoute { get => positionRoute; set => positionRoute = value; }
         public ObservableCollection<EnemyModel> ActiveEnemies { get => activeEnemies; set => activeEnemies = value; }
+        public UIViewModel UI1 { get => UI; set => UI = value; }
 
         private void GenerateRoute()
         {
@@ -102,7 +103,7 @@ namespace TowerDefense.ViewModel
                 else
                 {
                     removeIndex.Add(remove);
-                    UI.HealthLoss();
+                    UI1.HealthLoss();
                 }
                 remove++;
             }

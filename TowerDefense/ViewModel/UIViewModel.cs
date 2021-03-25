@@ -7,17 +7,20 @@ using System.Text;
 
 namespace TowerDefense.ViewModel
 {
-    class UIViewModel
+    public class UIViewModel
     {
-        PlayerDataModel playerData = new PlayerDataModel(100, 0);
+        private PlayerDataModel playerData;
 
         public UIViewModel()
         {
+            PlayerData = new PlayerDataModel(100, 0);
         }
+
+        public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }
 
         public void HealthLoss()
         {
-            playerData.Hp--;
+            PlayerData.Hp--;
         }
     }
 }
