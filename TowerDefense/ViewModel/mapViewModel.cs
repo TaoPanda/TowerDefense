@@ -15,53 +15,24 @@ namespace TowerDefense.ViewModel
         private TickTimer Tick;
         private UIViewModel UI = new UIViewModel();
         public MapViewModel(){
+            //Creates tick object
             Tick = new TickTimer(this);
             LoadRoute();
+            //Adds debug enemy
             ActiveEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0]));
+            //Starts game
             Tick.startGame();
         }
         public void LoadRoute()
         {
-            Route.Add("2.0");
-            Route.Add("2.1");
-            Route.Add("2.2");
-            Route.Add("3.2");
-            Route.Add("4.2");
-            Route.Add("5.2");
-            Route.Add("6.2");
-            Route.Add("6.3");
-            Route.Add("6.4");
-            Route.Add("6.5");
-            Route.Add("5.5");
-            Route.Add("4.5");
-            Route.Add("3.5");
-            Route.Add("3.6");
-            Route.Add("3.7");
-            Route.Add("3.8");
-            Route.Add("3.9");
-            Route.Add("4.9");
-            Route.Add("5.9");
-            Route.Add("6.9");
-            Route.Add("7.9");
-            Route.Add("8.9");
-            Route.Add("9.9");
-            Route.Add("10.9");
-            Route.Add("11.9");
-            Route.Add("11.10");
-            Route.Add("11.11");
-            Route.Add("11.12");
-            Route.Add("11.13");
-            Route.Add("11.14");
-            Route.Add("10.14");
-            Route.Add("9.14");
-            Route.Add("8.14");
-            Route.Add("7.14");
-            Route.Add("7.15");
-            Route.Add("7.16");
-            Route.Add("7.17");
-            Route.Add("7.18");
-            Route.Add("7.19");
-            GenerateRoute();
+            using (var context = new TowerDefenseContext())
+            {
+                
+                foreach (var row in context.Route)
+                    Route.Add(row.X.ToString() + "." + row.Y.ToString());
+                GenerateRoute();
+            }
+           
         }
 
         public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
@@ -71,6 +42,7 @@ namespace TowerDefense.ViewModel
 
         private void GenerateRoute()
         {
+            //Generates the enemy route from given coordinates 
             foreach (string element in Route)
             {
                int[] cords = GetCenterOfCell(element, 25);
@@ -81,6 +53,7 @@ namespace TowerDefense.ViewModel
 
        private int[] GetCenterOfCell(string cordinat,int cellSize)
         {
+            //Gets the pixel position of the given cell
             string s = cordinat;
             string[] parts = s.Split('.');
             int x = int.Parse(parts[0]);
@@ -91,11 +64,13 @@ namespace TowerDefense.ViewModel
 
         public void MoveEnemyInList()
         {
+            //Moves all active enenies and deletes them when they reach the end
             List<int> removeIndex = new List<int>();
             int remove = 0;
             foreach(EnemyModel enemy in ActiveEnemies)
             {
                 enemy.NextPosition();
+                //Checks if they are at the last cell of the route
                 if(enemy.Position != PositionRoute.Count)
                 {
                     enemy.Cordinate = positionRoute[enemy.Position];

@@ -7,12 +7,13 @@
         xmlns:views = "clr-namespace:TowerDefense.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="540" Width="800">
-    <Grid>
+    <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <views:Map x:Name="MapViewControl" Grid.Column="0"/>
         <views:UIView x:Name="UIViewControl" Grid.Column="1"/>
+        <Image Source="" Name="customPointer" Width="34" Height="34"/>
     </Grid>
 </Window>

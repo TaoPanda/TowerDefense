@@ -26,11 +26,13 @@ namespace TowerDefense.View
         }
         private void InitiateGrid()
         {
+        
             myGrid.Width = 500;
             myGrid.Height = 500;
             myGrid.HorizontalAlignment = HorizontalAlignment.Left;
             myGrid.VerticalAlignment = VerticalAlignment.Top;
             myGrid.ShowGridLines = true;
+            //Creates rows and collumns based of the given number
             for (int i = 0; i < 20; i++)
             {
                 ColumnDefinition colDef = new ColumnDefinition();

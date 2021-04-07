@@ -13,7 +13,8 @@ namespace TowerDefense.ViewModel
 
         public UIViewModel()
         {
-            PlayerData = new PlayerDataModel(100, 0);
+            //Creates player
+            PlayerData = new PlayerDataModel(3, 0);
         }
 
         public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }

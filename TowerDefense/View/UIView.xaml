@@ -13,8 +13,8 @@
     </UserControl.DataContext>
     <Border  BorderBrush="Gray" BorderThickness="2" DockPanel.Dock="Top">
         <Canvas x:Name="myCanvas" Margin="0,0,177,0">
-            <Image x:Name="cityImg" Source="C:\Users\chri45n5\source\repos\TaoPanda\TowerDefense\TowerDefense\images\heart.png" Canvas.Top="14" Width="29" Height="34" Canvas.Left="112" />
-            <TextBlock TextAlignment="Center" Background="LightGray" FontSize="20" Text="{Binding UI1.PlayerData.Hp}" Height="24" Width="32" Canvas.Left="148" Canvas.Top="17"/>
+            <Image x:Name="cityImg" Source="C:\Users\chri45n5\source\repos\TaoPanda\TowerDefense\TowerDefense\images\heart.png" Canvas.Top="14" Width="29" Height="34" Canvas.Left="28" />
+            <TextBlock TextAlignment="Center" Background="LightGray" FontSize="20" Text="{Binding UI1.PlayerData.Hp}" Height="24" Width="32" Canvas.Left="68" Canvas.Top="19"/>
         </Canvas>
     </Border>
 

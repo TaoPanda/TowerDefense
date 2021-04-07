@@ -13,7 +13,8 @@
     </UserControl.DataContext>
 
     <Canvas x:Name="myCanvas">
-
+        <Rectangle
+            Fill="Green" Height="500" Width="500"></Rectangle>
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -21,7 +22,7 @@
                         <Rectangle
                         Width="25"
                         Height="25"
-                        Fill="SandyBrown"
+                        Fill="SaddleBrown"
                         Canvas.Left="{Binding X,  UpdateSourceTrigger=PropertyChanged}"
                         Canvas.Top="{Binding Y,  UpdateSourceTrigger=PropertyChanged}"    >
                         </Rectangle>

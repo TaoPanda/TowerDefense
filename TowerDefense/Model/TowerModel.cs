@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace TowerDefense.Model
 {
-    class TowerModel
+    public class TowerModel
     {
+        private int id;
         public string name;
         public int range;
         public int dmg;
@@ -16,7 +18,10 @@ namespace TowerDefense.Model
         public int size;
         public string color;
 
-        public TowerModel(string name, int range, int dmg, int fr, int cost, int lvl, int xp, int size, string color)
+        [Key]
+        public int Id { get => id; set => id = value; }
+
+        public TowerModel()
         {
             this.name = name;
             this.range = range;
