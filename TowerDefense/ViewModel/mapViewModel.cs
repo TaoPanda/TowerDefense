@@ -9,6 +9,9 @@ namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
+        private int enemiesThisWave = 5;
+        private int TotalEnmSpawnTick = 0;
+        private int RemainingEnmSpawnTick = 0;
         private ObservableCollection<EnemyModel> activeEnemies = new ObservableCollection<EnemyModel>();
         private ObservableCollection<string> Route = new ObservableCollection<string>();
         private ObservableCollection<Coordinates> positionRoute = new ObservableCollection<Coordinates>();
@@ -19,7 +22,6 @@ namespace TowerDefense.ViewModel
             Tick = new TickTimer(this);
             LoadRoute();
             //Adds debug enemy
-            ActiveEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0]));
             //Starts game
             Tick.startGame();
         }
@@ -39,6 +41,19 @@ namespace TowerDefense.ViewModel
         public ObservableCollection<Coordinates> PositionRoute { get => positionRoute; set => positionRoute = value; }
         public ObservableCollection<EnemyModel> ActiveEnemies { get => activeEnemies; set => activeEnemies = value; }
         public UIViewModel UI1 { get => UI; set => UI = value; }
+
+        public void SpawnInterval()
+        {
+            if(RemainingEnmSpawnTick == TotalEnmSpawnTick && enemiesThisWave > 0)
+            {
+                Random random = new Random();
+                TotalEnmSpawnTick = random.Next(2, 5);
+                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0]));
+                RemainingEnmSpawnTick = 0;
+                enemiesThisWave--;
+            }
+            RemainingEnmSpawnTick++;
+        }
 
         private void GenerateRoute()
         {
