@@ -3,19 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TowerDefense.View"
+             xmlns:local="clr-namespace:TowerDefense.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200"
              xmlns:viewModel = "clr-namespace:TowerDefense.ViewModel" 
 >
+    <UserControl.Resources>
+        <local:MapViewModel x:Key="mapViewModel"/>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <viewModel:MapViewModel/>
     </UserControl.DataContext>
     <Border  BorderBrush="Gray" BorderThickness="2" DockPanel.Dock="Top">
         <Canvas x:Name="myCanvas" Margin="0,0,177,0">
             <Image x:Name="cityImg" Source="C:\Users\chri45n5\source\repos\TaoPanda\TowerDefense\TowerDefense\images\heart.png" Canvas.Top="14" Width="29" Height="34" Canvas.Left="28" />
-            <TextBlock TextAlignment="Center" Background="LightGray" FontSize="20" Text="{Binding UI1.PlayerData.Hp}" Height="24" Width="32" Canvas.Left="68" Canvas.Top="19"/>
-            <Button Content="Start Next Wave" Canvas.Left="29" Canvas.Top="64"/>
+            <TextBlock TextAlignment="Center" Background="LightGray" FontSize="20" Text="{Binding PlayerData.Hp}" Height="24" Width="32" Canvas.Left="68" Canvas.Top="19"/>
+            <Button FontSize="20" Content="Start Next Wave" Canvas.Left="24" Canvas.Top="64"
+                     Command = "{Binding simpleCommand, Source={StaticResource mapViewModel}}" 
+                    CommandParameter = "startgame"
+                    
+                    
+                    />
         </Canvas>
     </Border>
 

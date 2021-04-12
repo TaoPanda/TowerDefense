@@ -4,20 +4,24 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using TowerDefense.Model;
 using System.Text;
+using TowerDefense.ViewModel.Commands;
 
 namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
-        private int enemiesThisWave = 5;
+        public int enemiesThisWave = 5;
         private int TotalEnmSpawnTick = 0;
         private int RemainingEnmSpawnTick = 0;
         private ObservableCollection<EnemyModel> activeEnemies = new ObservableCollection<EnemyModel>();
         private ObservableCollection<string> Route = new ObservableCollection<string>();
         private ObservableCollection<Coordinates> positionRoute = new ObservableCollection<Coordinates>();
         private TickTimer Tick;
-        private UIViewModel UI = new UIViewModel();
+        private PlayerDataModel playerData;
+        public SimpleCommand simpleCommand { get; set; }  //En del af binding til knappen. Fortsætter i SimpleCommand.cs
         public MapViewModel(){
+            PlayerData = new PlayerDataModel(3, 0);
+            this.simpleCommand = new SimpleCommand(this);
             //Creates tick object
             Tick = new TickTimer(this);
             LoadRoute();
@@ -25,6 +29,19 @@ namespace TowerDefense.ViewModel
             //Starts game
             Tick.startGame();
         }
+      
+
+        public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }
+
+        public void newWave()
+        {
+           enemiesThisWave = 5;
+        }
+        public void HealthLoss()
+        {
+            PlayerData.Hp--;
+        }
+
         public void LoadRoute()
         {
             using (var context = new TowerDefenseContext())
@@ -40,7 +57,6 @@ namespace TowerDefense.ViewModel
         public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
         public ObservableCollection<Coordinates> PositionRoute { get => positionRoute; set => positionRoute = value; }
         public ObservableCollection<EnemyModel> ActiveEnemies { get => activeEnemies; set => activeEnemies = value; }
-        public UIViewModel UI1 { get => UI; set => UI = value; }
 
         public void SpawnInterval()
         {
@@ -93,7 +109,7 @@ namespace TowerDefense.ViewModel
                 else
                 {
                     removeIndex.Add(remove);
-                    UI1.HealthLoss();
+                    HealthLoss();
                 }
                 remove++;
             }

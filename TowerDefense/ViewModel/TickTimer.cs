@@ -8,7 +8,7 @@ using TowerDefense.ViewModel;
 public class TickTimer
 {
 	private DispatcherTimer timer = new DispatcherTimer();
-    private MapViewModel MapView;
+    public MapViewModel MapView;
     public TickTimer(MapViewModel mapView)
     {
         MapView = mapView;
@@ -17,7 +17,7 @@ public class TickTimer
 
     public void startGame()
     {
-		timer.Interval = TimeSpan.FromMilliseconds(500);
+		timer.Interval = TimeSpan.FromMilliseconds(100);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}
