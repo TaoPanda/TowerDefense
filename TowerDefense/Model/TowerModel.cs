@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Nest;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using TowerDefense.ViewModel;
 
 namespace TowerDefense.Model
 {
-    public class TowerModel
+    public class TowerModel : INotifyPropertyChanged
     {
         private int id;
         private string name;
@@ -18,6 +21,7 @@ namespace TowerDefense.Model
         private int size;
         private string color;
         private Coordinates cordinate;
+        private int attackCount = 0;
 
         public TowerModel(int id, string name, int range, int dmg, int fr, int cost, int lvl, int xp, int size, string color)
         {
@@ -31,6 +35,7 @@ namespace TowerDefense.Model
             this.xp = xp;
             this.size = size;
             this.color = color;
+            distance(1, 1, 4, 2);
         }
 
         [Key]
@@ -45,15 +50,50 @@ namespace TowerDefense.Model
         public int Size { get => size; set => size = value; }
         public string Color { get => color; set => color = value; }
         public Coordinates Cordinate { get => cordinate; set => cordinate = value; }
-
-        public void checkMobsInRange()
-        {
-
+        public int AttackCount { get => attackCount; set { 
+                if(attackCount != value)
+                {
+                    attackCount = value;
+                    RaisePropertyChanged("AttackCount");
+                }    
+            } 
         }
 
-        public void attack()
+        static double distance(int x1, int y1, int x2, int y2)
         {
+            double test = Math.Sqrt(Math.Pow(x2 - x1, 2) +
+                          Math.Pow(y2 - y1, 2) * 1.0);
+            double final = Math.Round((test * 100000.0) / 100000);
+            return final;
+        }
 
+        public void checkRange()
+        {
+            MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
+            foreach (EnemyModel enemy in MapView.ActiveEnemies)
+            {
+                if (distance(cordinate.X / 25, cordinate.Y / 25, enemy.Cordinate.X / 25, enemy.Cordinate.Y / 25) <= range)
+                {
+                    attack(enemy);
+                }
+            }
+        }
+
+        public void attack(EnemyModel enemy)
+        {
+            AttackCount++;
+            enemy.Hp--;
+            
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+
+            }
         }
 
 

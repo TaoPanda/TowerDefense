@@ -17,7 +17,7 @@ public class TickTimer
 
     public void startGame()
     {
-		timer.Interval = TimeSpan.FromMilliseconds(100);
+		timer.Interval = TimeSpan.FromMilliseconds(500);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}
@@ -30,6 +30,7 @@ public class TickTimer
         MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
         MapView.MoveEnemyInList();
         MapView.SpawnInterval();
+        MapView.TowerTick();
     }
 
         /*

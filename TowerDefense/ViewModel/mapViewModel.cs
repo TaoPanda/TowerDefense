@@ -49,6 +49,14 @@ namespace TowerDefense.ViewModel
             PlayerData.Hp--;
         }
 
+        public void TowerTick()
+        {
+            foreach(TowerModel tower in activeTowers)
+            {
+                tower.checkRange();
+            }
+        }
+
         public void LoadRoute()
         {
             using (var context = new TowerDefenseContext())
@@ -131,8 +139,8 @@ namespace TowerDefense.ViewModel
 
         public void placeTower()
         {
-            TowerModel debugTower = new TowerModel(1, "test", 2, 1, 10, 10, 1, 0, 1, "blue");
-            debugTower.Cordinate = new Coordinates(8, 11);
+            TowerModel debugTower = new TowerModel(1, "test", 1, 1, 10, 10, 1, 0, 1, "blue");
+            debugTower.Cordinate = new Coordinates(9, 12);
             string formatCords = debugTower.Cordinate.X.ToString() + "." + debugTower.Cordinate.Y.ToString();
             int[] towerCords = GetCenterOfCell(formatCords, 25);
             debugTower.Cordinate = new Coordinates(towerCords[1], towerCords[0]);
