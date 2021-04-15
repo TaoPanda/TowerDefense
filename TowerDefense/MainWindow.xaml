@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:TowerDefense"
         xmlns:views = "clr-namespace:TowerDefense.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="540" Width="800">
+        Title="MainWindow" Height="540" Width="800"
+        ResizeMode="NoResize"
+        WindowStyle="SingleBorderWindow"
+        >
     <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"/>

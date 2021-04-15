@@ -43,6 +43,33 @@ namespace TowerDefense.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Cost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dmg")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Lvl")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Range")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Xp")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Towers");

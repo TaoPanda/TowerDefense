@@ -4,14 +4,14 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows.Threading;
 using TowerDefense.ViewModel;
+using TowerDefense;
 
 public class TickTimer
 {
 	private DispatcherTimer timer = new DispatcherTimer();
-    public MapViewModel MapView;
-    public TickTimer(MapViewModel mapView)
+    public TickTimer()
     {
-        MapView = mapView;
+
     }
 
 
@@ -27,6 +27,7 @@ public class TickTimer
     }
     public void Timer_Tick(object sender, EventArgs args)
     {
+        MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
         MapView.MoveEnemyInList();
         MapView.SpawnInterval();
     }

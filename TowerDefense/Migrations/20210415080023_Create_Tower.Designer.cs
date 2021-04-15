@@ -9,8 +9,8 @@ using TowerDefense.Model;
 namespace TowerDefense.Migrations
 {
     [DbContext(typeof(TowerDefenseContext))]
-    [Migration("20210407085119_CreateTowerDefenseDB")]
-    partial class CreateTowerDefenseDB
+    [Migration("20210415080023_Create_Tower")]
+    partial class Create_Tower
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,33 @@ namespace TowerDefense.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Cost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dmg")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Lvl")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Range")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Xp")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

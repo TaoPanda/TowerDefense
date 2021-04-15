@@ -12,7 +12,7 @@ namespace TowerDefense.Model
         private int y;
         private int x;
 
-        public Coordinates(int y, int x)
+        public Coordinates(int x, int y)
         {
             this.Y = y;
             this.X = x;

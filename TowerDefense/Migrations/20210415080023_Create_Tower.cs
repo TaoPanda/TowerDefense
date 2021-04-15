@@ -2,7 +2,7 @@
 
 namespace TowerDefense.Migrations
 {
-    public partial class CreateTowerDefenseDB : Migration
+    public partial class Create_Tower : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,7 +25,16 @@ namespace TowerDefense.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Range = table.Column<int>(type: "int", nullable: false),
+                    Dmg = table.Column<int>(type: "int", nullable: false),
+                    Fr = table.Column<int>(type: "int", nullable: false),
+                    Cost = table.Column<int>(type: "int", nullable: false),
+                    Lvl = table.Column<int>(type: "int", nullable: false),
+                    Xp = table.Column<int>(type: "int", nullable: false),
+                    Size = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

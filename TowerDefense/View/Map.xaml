@@ -5,14 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TowerDefense.View"
       xmlns:viewModel = "clr-namespace:TowerDefense.ViewModel" 
-      mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300">
-
-
-    <UserControl.DataContext>
-        <viewModel:MapViewModel/>
-    </UserControl.DataContext>
-
-    <Canvas x:Name="myCanvas">
+      mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300"
+      DataContext="{StaticResource sharedMapViewModel}"
+>
+<Canvas x:Name="myCanvas">
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">
@@ -31,7 +27,28 @@
 
                 </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ItemsControl>
+        </ItemsControl>
+
+        <ItemsControl ItemsSource = "{Binding Path = ActiveTowers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Rectangle
+                        Width="25"
+                        Height="25"
+                        Fill="Blue"
+                        Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged}"
+                        Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged}"    >
+                        </Rectangle>
+                    </Canvas>
+
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+
         <ItemsControl ItemsSource = "{Binding Path = ActiveEnemies, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
