@@ -10,6 +10,7 @@ namespace TowerDefense.Model
         private int hp;
         private int coins;
         private int round;
+        private bool canPlaceTower = false;
 
         public PlayerDataModel(int hp, int coins)
         {
@@ -28,6 +29,14 @@ namespace TowerDefense.Model
         }
         public int Coins { get => coins; set => coins = value; }
         public int Round { get => round; set => round = value; }
+        public bool CanPlaceTower { get => canPlaceTower; set { 
+                if(canPlaceTower != value)
+                {
+                    canPlaceTower = value;
+                    RaisePropertyChanged("CanPlaceTower");
+                }
+            } 
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -17,11 +17,11 @@ public class TickTimer
 
     public void startGame()
     {
-		timer.Interval = TimeSpan.FromMilliseconds(500);
+		timer.Interval = TimeSpan.FromMilliseconds(250);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}
-    private void gameOver()
+    public void gameOver()
     {
         timer.Stop();
     }

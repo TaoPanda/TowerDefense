@@ -22,8 +22,9 @@ namespace TowerDefense.ViewModel
         private TickTimer Tick;
         private PlayerDataModel playerData;
         private SimpleCommand simpleCommand;
+        private PlaceTowerCommand towerCommand;
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(3, 0);
+            PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
             //Creates tick object
             Tick = new TickTimer();
@@ -32,11 +33,18 @@ namespace TowerDefense.ViewModel
             //Adds debug enemy
             //Starts game
             Tick.startGame();
-            placeTower();
+            TowerModel tower = new TowerModel(1, "test", 2, 1, 1, 1, 1, 0, 1, "blue");
+            tower.Cordinate = new Coordinates(9, 9);
+            placeTower(tower);
         }
-
-        
         public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }
+        public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
+        public ObservableCollection<Coordinates> PositionRoute { get => positionRoute; set => positionRoute = value; }
+        public ObservableCollection<EnemyModel> ActiveEnemies { get => activeEnemies; set => activeEnemies = value; }
+        public int EnemiesThisWave { get => enemiesThisWave; set => enemiesThisWave = value; }
+        public SimpleCommand SimpleCommand { get => simpleCommand; set => simpleCommand = value; }
+        public ObservableCollection<TowerModel> ActiveTowers { get => activeTowers; set => activeTowers = value; }
+        public PlaceTowerCommand TowerCommand { get => towerCommand; set => towerCommand = value; }
 
         public void newWave()
         {
@@ -44,14 +52,19 @@ namespace TowerDefense.ViewModel
             enemiesThisWave = Convert.ToInt32(5 + Math.Floor(wavesCount * 1.5));
             RemainingEnmSpawnTick = 0;
         }
+
         public void HealthLoss()
         {
             PlayerData.Hp--;
+            if(PlayerData.Hp == 0)
+            {
+                Tick.gameOver();
+            }
         }
 
         public void TowerTick()
         {
-            foreach(TowerModel tower in activeTowers)
+            foreach (TowerModel tower in activeTowers)
             {
                 tower.checkRange();
             }
@@ -61,21 +74,13 @@ namespace TowerDefense.ViewModel
         {
             using (var context = new TowerDefenseContext())
             {
-                
+
                 foreach (var row in context.Route)
                     Route.Add(row.Y.ToString() + "." + row.X.ToString());
                 GenerateRoute();
             }
-           
+
         }
-
-        public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
-        public ObservableCollection<Coordinates> PositionRoute { get => positionRoute; set => positionRoute = value; }
-        public ObservableCollection<EnemyModel> ActiveEnemies { get => activeEnemies; set => activeEnemies = value; }
-        public int EnemiesThisWave { get => enemiesThisWave; set => enemiesThisWave = value; }
-        public SimpleCommand SimpleCommand { get => simpleCommand; set => simpleCommand = value; }
-        public ObservableCollection<TowerModel> ActiveTowers { get => activeTowers; set => activeTowers = value; }
-
         public void SpawnInterval()
         {
             if(RemainingEnmSpawnTick == TotalEnmSpawnTick && enemiesThisWave > 0)
@@ -85,8 +90,17 @@ namespace TowerDefense.ViewModel
                 activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0]));
                 RemainingEnmSpawnTick = 0;
                 enemiesThisWave--;
+                
             }
             RemainingEnmSpawnTick++;
+            if (activeEnemies.Count == 0)
+            {
+                playerData.CanPlaceTower = true;
+            }
+            else
+            {
+                playerData.CanPlaceTower = false;
+            }
         }
 
         private void GenerateRoute()
@@ -136,15 +150,33 @@ namespace TowerDefense.ViewModel
                 ActiveEnemies.RemoveAt(index);
             }
         }
-
-        public void placeTower()
+        public bool isCellEmpty(Coordinates coordinates)
         {
-            TowerModel debugTower = new TowerModel(1, "test", 1, 1, 10, 10, 1, 0, 1, "blue");
-            debugTower.Cordinate = new Coordinates(9, 12);
-            string formatCords = debugTower.Cordinate.X.ToString() + "." + debugTower.Cordinate.Y.ToString();
-            int[] towerCords = GetCenterOfCell(formatCords, 25);
-            debugTower.Cordinate = new Coordinates(towerCords[1], towerCords[0]);
-            activeTowers.Add(debugTower);
+            foreach(Coordinates routeCords in positionRoute)
+            {
+                if(routeCords.X == coordinates.X && routeCords.Y == coordinates.Y)
+                {
+                    return false;
+                }
+            }
+            foreach(TowerModel towerCords in activeTowers)
+            {
+                if(towerCords.Cordinate.X == coordinates.X && towerCords.Cordinate.Y == coordinates.Y)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public void placeTower(TowerModel tower)
+        {
+            if (isCellEmpty(tower.Cordinate))
+            {
+                string formatCords = tower.Cordinate.X.ToString() + "." + tower.Cordinate.Y.ToString();
+                int[] towerCords = GetCenterOfCell(formatCords, 25);
+                tower.Cordinate = new Coordinates(towerCords[1], towerCords[0]);
+                activeTowers.Add(tower);
+            }
         }
 
     }

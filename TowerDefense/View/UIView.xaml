@@ -15,8 +15,10 @@
             <Button FontSize="20" Content="Start Next Wave" Canvas.Left="24" Canvas.Top="64"
                      Command = "{Binding SimpleCommand, Source={StaticResource sharedMapViewModel}}" 
                     CommandParameter = "startgame"
-                    
-                    
+                    />
+            <Button IsEnabled="{Binding PlayerData.CanPlaceTower, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Content="Place tower" Canvas.Left="22" Canvas.Top="116"
+                     Command = "{Binding TowerCommand, Source={StaticResource sharedMapViewModel}}" 
+                    CommandParameter = "placetower"
                     />
         </Canvas>
     </Border>

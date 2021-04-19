@@ -9,6 +9,7 @@
       DataContext="{StaticResource sharedMapViewModel}"
 >
 <Canvas x:Name="myCanvas">
+    
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">
