@@ -5,6 +5,7 @@ using System.Drawing;
 using TowerDefense.Model;
 using System.Text;
 using TowerDefense.ViewModel.Commands;
+using System.Windows.Input;
 
 namespace TowerDefense.ViewModel
 {
@@ -23,6 +24,7 @@ namespace TowerDefense.ViewModel
         private PlayerDataModel playerData;
         private SimpleCommand simpleCommand;
         private PlaceTowerCommand towerCommand;
+        private Coordinates testTowerPlace = new Coordinates(0, 0);
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
@@ -45,6 +47,13 @@ namespace TowerDefense.ViewModel
         public SimpleCommand SimpleCommand { get => simpleCommand; set => simpleCommand = value; }
         public ObservableCollection<TowerModel> ActiveTowers { get => activeTowers; set => activeTowers = value; }
         public PlaceTowerCommand TowerCommand { get => towerCommand; set => towerCommand = value; }
+        public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
+
+        public void moveCursor(int x, int y) { 
+            // Sets the Height/Width of the circle to the mouse coordinates.
+            TestTowerPlace.X = x;
+            TestTowerPlace.Y = y;
+        }
 
         public void newWave()
         {

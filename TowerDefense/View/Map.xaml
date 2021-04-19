@@ -5,10 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TowerDefense.View"
       xmlns:viewModel = "clr-namespace:TowerDefense.ViewModel" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
       mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300"
       DataContext="{StaticResource sharedMapViewModel}"
+
 >
-<Canvas x:Name="myCanvas">
+    
+<Canvas x:Name="myCanvas" MouseMove="myCanvas_MouseMove">
     
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
@@ -68,6 +71,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Rectangle Width="25" Height="25" Fill="AliceBlue" Canvas.Left="{Binding TestTowerPlace.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding TestTowerPlace.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></Rectangle>
         <Grid x:Name="myGrid">
         </Grid>
 

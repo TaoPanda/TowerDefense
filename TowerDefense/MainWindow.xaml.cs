@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TowerDefense.ViewModel;
 
 namespace TowerDefense
 {
@@ -24,14 +25,6 @@ namespace TowerDefense
         {
             InitializeComponent();
         }
-        private void OnMouseMoveHandler(object sender, MouseEventArgs e)
-        {
-            Point p = e.GetPosition(mainGrid);
-            double pX = p.X;
-            double pY = p.Y;
-            Canvas.SetTop(customPointer, pY);
-            Canvas.SetLeft(customPointer, pX);
-            Cursor = Cursors.None;
-        }
+
     }
 }

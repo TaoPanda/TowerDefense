@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TowerDefense.ViewModel;
 
 namespace TowerDefense.View
 {
@@ -43,5 +44,15 @@ namespace TowerDefense.View
             }
         }
 
+        private void myCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Get the x and y coordinates of the mouse pointer.
+            Point position = e.GetPosition(myCanvas);
+            double pX = position.X;
+            double pY = position.Y;
+
+            MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
+            MapView.moveCursor(Convert.ToInt32(pX), Convert.ToInt32(pY));
+        }
     }
 }
