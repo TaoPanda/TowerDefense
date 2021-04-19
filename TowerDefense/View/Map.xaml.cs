@@ -46,7 +46,7 @@ namespace TowerDefense.View
             }
         }
 
-        private void callViewmodelFunction(object sender, MouseButtonEventArgs e)
+        private void callViewmodelFunction(object sender, MouseEventArgs e)
         {
             Point position = Mouse.GetPosition(myCanvas);
             MapViewModel.GetMousePos(position.X, position.Y);

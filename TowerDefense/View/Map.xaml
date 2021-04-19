@@ -9,7 +9,7 @@
              mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300"
       DataContext="{StaticResource sharedMapViewModel}"
 >
-    <Canvas x:Name="myCanvas" MouseLeftButtonDown="callViewmodelFunction">
+    <Canvas x:Name="myCanvas" MouseMove="callViewmodelFunction">
 
         <Rectangle
             Fill="Green" Height="500" Width="500">
