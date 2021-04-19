@@ -5,6 +5,8 @@ using System.Drawing;
 using TowerDefense.Model;
 using System.Text;
 using TowerDefense.ViewModel.Commands;
+using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace TowerDefense.ViewModel
 {
@@ -145,6 +147,12 @@ namespace TowerDefense.ViewModel
             int[] towerCords = GetCenterOfCell(formatCords, 25);
             debugTower.Cordinate = new Coordinates(towerCords[1], towerCords[0]);
             activeTowers.Add(debugTower);
+            
+        }
+
+        public void GetMousePos(double x, double y)
+        {
+            
         }
 
     }

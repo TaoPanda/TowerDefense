@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using TowerDefense.ViewModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -18,6 +19,8 @@ namespace TowerDefense.View
     /// </summary>
     public partial class Map : UserControl
     {
+        MapViewModel MapViewModel = new MapViewModel();
+
         public Map()
         {
             InitializeComponent();
@@ -43,5 +46,10 @@ namespace TowerDefense.View
             }
         }
 
+        private void callViewmodelFunction(object sender, MouseButtonEventArgs e)
+        {
+            Point position = Mouse.GetPosition(myCanvas);
+            MapViewModel.GetMousePos(position.X, position.Y);
+        }
     }
 }
