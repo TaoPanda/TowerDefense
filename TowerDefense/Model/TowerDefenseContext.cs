@@ -12,7 +12,7 @@ namespace TowerDefense.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=CV-BB-5992;Database=tower;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=PC-BB-5987;Database=tower;Trusted_Connection=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
