@@ -6,6 +6,7 @@ using TowerDefense.Model;
 using System.Text;
 using TowerDefense.ViewModel.Commands;
 using System.Windows.Input;
+using System.Threading;
 
 namespace TowerDefense.ViewModel
 {

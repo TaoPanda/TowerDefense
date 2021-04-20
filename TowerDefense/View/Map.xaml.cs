@@ -23,7 +23,7 @@ namespace TowerDefense.View
         {
             InitializeComponent();
             InitiateGrid();
-                    
+            //myCanvas.MouseMove -= myCanvas_MouseMove;
         }
         private void InitiateGrid()
         {
@@ -44,15 +44,6 @@ namespace TowerDefense.View
             }
         }
 
-        private void myCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            // Get the x and y coordinates of the mouse pointer.
-            Point position = e.GetPosition(myCanvas);
-            double pX = position.X;
-            double pY = position.Y;
-
-            MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
-            MapView.moveCursor(Convert.ToInt32(pX), Convert.ToInt32(pY));
-        }
     }
+
 }
