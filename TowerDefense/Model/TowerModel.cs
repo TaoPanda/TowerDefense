@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Windows.Media.Imaging;
 using TowerDefense.ViewModel;
 
 namespace TowerDefense.Model
@@ -81,9 +82,24 @@ namespace TowerDefense.Model
 
         public void attack(EnemyModel enemy)
         {
+            string replaceMe = AppDomain.CurrentDomain.BaseDirectory;
+            replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
             AttackCount++;
             enemy.Hp--;
-            
+            if(enemy.Hp <= 99)
+            {
+                BitmapImage myImage = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break1.png", UriKind.Absolute));
+                enemy.Image = myImage;
+            } else if (enemy.Hp <= 50)
+            {
+                BitmapImage myImage = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break2.png", UriKind.Absolute));
+                enemy.Image = myImage;
+            }
+            else if (enemy.Hp <= 25)
+            {
+                BitmapImage myImage = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break3.png", UriKind.Absolute));
+                enemy.Image = myImage;
+            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

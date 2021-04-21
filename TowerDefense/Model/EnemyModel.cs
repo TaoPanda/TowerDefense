@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Media.Imaging;
 
 namespace TowerDefense.Model
 {
@@ -15,6 +16,7 @@ namespace TowerDefense.Model
         private int cost;
         private string color;
         private Coordinates cordinate;
+        private BitmapImage image;
 
         public string Name { get => name; set => name = value; }
         public int Hp { get => hp; set => hp = value; }
@@ -40,6 +42,35 @@ namespace TowerDefense.Model
             } 
         }
 
+        public BitmapImage Image 
+        {
+            get { return image; }
+            set
+            {
+                if(Image != value)
+                {
+
+                    image = value;
+                    RaisePropertyChanged("Image");
+                }
+
+
+            }
+        }
+
+        public EnemyModel(string name, int hp, int ms, int xp, int cost, string color, Coordinates coordinates, BitmapImage image)
+        {
+            this.Name = name;
+            this.Hp = hp;
+            this.Ms = ms;
+            this.Xp = xp;
+            Position = 0;
+            this.Cost = cost;
+            this.Color = color;
+            this.Cordinate = coordinates;
+            this.image = image;
+        }
+
         public EnemyModel(string name, int hp, int ms, int xp, int cost, string color, Coordinates coordinates)
         {
             this.Name = name;
@@ -50,7 +81,6 @@ namespace TowerDefense.Model
             this.Cost = cost;
             this.Color = color;
             this.Cordinate = coordinates;
-
         }
 
         public void NextPosition()

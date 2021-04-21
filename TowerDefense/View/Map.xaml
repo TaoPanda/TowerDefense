@@ -57,13 +57,14 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas>
-                        <Rectangle
+                        <Image
+                                x:Name="EnemyImg"
                                 Width="25"
                                 Height="25"
-                                Fill="Red"
+                            Source="{Binding Image, UpdateSourceTrigger=PropertyChanged}"
                                 Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                 Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
-                        </Rectangle>
+                        </Image>
                     </Canvas>
 
 
