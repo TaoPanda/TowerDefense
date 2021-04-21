@@ -22,7 +22,14 @@ namespace TowerDefense.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            this.viewModel.newWave();
+            if (this.viewModel.PlaceTowerModeEnabled)
+            {
+                this.viewModel.PlaceTowerModeEnabled = false;
+            }
+            else
+            {
+                this.viewModel.PlaceTowerModeEnabled = true;
+            }
         }
 
     }

@@ -26,19 +26,17 @@ namespace TowerDefense.ViewModel
         private SimpleCommand simpleCommand;
         private PlaceTowerCommand towerCommand;
         private Coordinates testTowerPlace = new Coordinates(0, 0);
+        private bool placeTowerModeEnabled = false;
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
+            this.towerCommand = new PlaceTowerCommand(this);
             //Creates tick object
             Tick = new TickTimer();
             LoadRoute();
-            test.Add("2");
             //Adds debug enemy
             //Starts game
             Tick.startGame();
-            TowerModel tower = new TowerModel(1, "test", 2, 1, 1, 1, 1, 0, 1, "blue");
-            tower.Cordinate = new Coordinates(9, 9);
-            placeTower(tower);
         }
         public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }
         public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
@@ -49,6 +47,7 @@ namespace TowerDefense.ViewModel
         public ObservableCollection<TowerModel> ActiveTowers { get => activeTowers; set => activeTowers = value; }
         public PlaceTowerCommand TowerCommand { get => towerCommand; set => towerCommand = value; }
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
+        public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
 
         public void moveCursor(int x, int y) { 
             // Sets the Height/Width of the circle to the mouse coordinates.
@@ -182,9 +181,6 @@ namespace TowerDefense.ViewModel
         {
             if (isCellEmpty(tower.Cordinate))
             {
-                string formatCords = tower.Cordinate.X.ToString() + "." + tower.Cordinate.Y.ToString();
-                int[] towerCords = GetCenterOfCell(formatCords, 25);
-                tower.Cordinate = new Coordinates(towerCords[1], towerCords[0]);
                 activeTowers.Add(tower);
             }
         }

@@ -11,7 +11,7 @@
 
 >
 
-    <Canvas x:Name="myCanvas" MouseMove="myCanvas_MouseMove">
+    <Canvas x:Name="myCanvas" MouseMove="myCanvas_MouseMove" MouseLeftButtonDown="callViewmodelFunction">
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">
@@ -70,7 +70,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Rectangle Opacity="0.25" Width="25" Height="25" Fill="Blue" Canvas.Left="{Binding TestTowerPlace.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding TestTowerPlace.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></Rectangle>
+        <Rectangle x:Name="hoverRectangle" Opacity="0" Width="25" Height="25" Fill="Blue" Canvas.Left="{Binding TestTowerPlace.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding TestTowerPlace.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></Rectangle>
         <Grid x:Name="myGrid">
         </Grid>
 

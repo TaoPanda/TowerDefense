@@ -22,6 +22,8 @@ namespace TowerDefense.ViewModel.Commands
         public void Execute(object parameter) 
         {
             this.viewModel.newWave();
+            this.viewModel.PlaceTowerModeEnabled = false;
+
         }
 
     }

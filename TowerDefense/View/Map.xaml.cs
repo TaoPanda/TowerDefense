@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TowerDefense.ViewModel;
+using TowerDefense.Model;
 
 namespace TowerDefense.View
 {
@@ -23,7 +24,6 @@ namespace TowerDefense.View
         {
             InitializeComponent();
             InitiateGrid();
-            //myCanvas.MouseMove -= myCanvas_MouseMove;
         }
         private void InitiateGrid()
         {
@@ -45,13 +45,38 @@ namespace TowerDefense.View
         }
         private void myCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            // Get the x and y coordinates of the mouse pointer.
-            Point position = e.GetPosition(myCanvas);
-            double pX =(int)Math.Round(position.X / 25.0) * 25;
-            double pY = (int)Math.Round(position.Y / 25.0) * 25;
-
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
-            MapView.moveCursor(Convert.ToInt32(pX), Convert.ToInt32(pY));
+            if(MapView.PlaceTowerModeEnabled)
+            {
+                hoverRectangle.Opacity = 0.25;
+                // Get the x and y coordinates of the mouse pointer.
+                Point position = e.GetPosition(myCanvas);
+                double pX = (int)Math.Round(position.X / 25.0) * 25;
+                double pY = (int)Math.Round(position.Y / 25.0) * 25;
+
+                MapView.moveCursor(Convert.ToInt32(pX), Convert.ToInt32(pY));
+            }
+            else
+            {
+                hoverRectangle.Opacity = 0;
+            }
+        }
+        private void callViewmodelFunction(object sender, MouseButtonEventArgs e)
+        {
+            MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
+            if (MapView.PlaceTowerModeEnabled)
+            {
+                Point position = Mouse.GetPosition(myCanvas);
+                TowerModel testTower = new TowerModel(1, "test", 2, 1, 1, 1, 1, 1, 1, "blue");
+                int pX = (int)Math.Round(position.X / 25.0) * 25;
+                int pY = (int)Math.Round(position.Y / 25.0) * 25;
+                testTower.Cordinate = new Coordinates(pX, pY);
+                MapView.placeTower(testTower);
+            }
+            else
+            {
+                hoverRectangle.Opacity = 0;
+            }
         }
 
 
