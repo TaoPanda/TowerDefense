@@ -9,15 +9,16 @@ using TowerDefense;
 public class TickTimer
 {
 	private DispatcherTimer timer = new DispatcherTimer();
+    private MapViewModel MapView;
     public TickTimer(MapViewModel mapViewModel)
     {
-
+        MapView = mapViewModel;
     }
 
 
     public void startGame()
     {
-		timer.Interval = TimeSpan.FromMilliseconds(50);
+		timer.Interval = TimeSpan.FromMilliseconds(250);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}
@@ -27,10 +28,10 @@ public class TickTimer
     }
     public void Timer_Tick(object sender, EventArgs args)
     {
-        MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
         MapView.MoveEnemyInList();
         MapView.SpawnInterval();
         MapView.TowerTick();
+        MapView.moveCursor();
     }
 
         /*
