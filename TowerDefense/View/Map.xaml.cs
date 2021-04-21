@@ -43,24 +43,6 @@ namespace TowerDefense.View
                 
             }
         }
-        private void myCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
-            if(MapView.PlaceTowerModeEnabled)
-            {
-                hoverRectangle.Opacity = 0.25;
-                // Get the x and y coordinates of the mouse pointer.
-                Point position = e.GetPosition(myCanvas);
-                double pX = (int)Math.Round(position.X / 25.0) * 25;
-                double pY = (int)Math.Round(position.Y / 25.0) * 25;
-
-                MapView.moveCursor(Convert.ToInt32(pX), Convert.ToInt32(pY));
-            }
-            else
-            {
-                hoverRectangle.Opacity = 0;
-            }
-        }
         private void callViewmodelFunction(object sender, MouseButtonEventArgs e)
         {
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
@@ -78,7 +60,6 @@ namespace TowerDefense.View
                 hoverRectangle.Opacity = 0;
             }
         }
-
 
     }
 

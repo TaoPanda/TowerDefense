@@ -7,11 +7,9 @@
       xmlns:viewModel = "clr-namespace:TowerDefense.ViewModel" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
       mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300"
-      DataContext="{StaticResource sharedMapViewModel}"
+      DataContext="{StaticResource sharedMapViewModel}">
 
->
-
-    <Canvas x:Name="myCanvas" MouseMove="myCanvas_MouseMove" MouseLeftButtonDown="callViewmodelFunction">
+    <Canvas x:Name="myCanvas"  MouseLeftButtonDown="callViewmodelFunction">
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using TowerDefense.Model;
 using System.Text;
 using TowerDefense.ViewModel.Commands;
 using System.Windows.Input;
 using System.Threading;
+using System.Windows;
 
 namespace TowerDefense.ViewModel
 {
@@ -32,11 +32,12 @@ namespace TowerDefense.ViewModel
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             //Creates tick object
-            Tick = new TickTimer();
+            Tick = new TickTimer(this);
             LoadRoute();
             //Adds debug enemy
             //Starts game
             Tick.startGame();
+            RoutedEvent[] events = EventManager.GetRoutedEvents();
         }
         public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }
         public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
@@ -49,10 +50,15 @@ namespace TowerDefense.ViewModel
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
 
-        public void moveCursor(int x, int y) { 
-            // Sets the Height/Width of the circle to the mouse coordinates.
-            TestTowerPlace.X = x;
-            TestTowerPlace.Y = y;
+        public void moveCursor() {
+            if (placeTowerModeEnabled)
+            {
+                Point position = Mouse.GetPosition((IInputElement)Application.Current.MainWindow);
+                int pX = (int)Math.Round(position.X / 25.0) * 25;
+                int pY = (int)Math.Round(position.Y / 25.0) * 25;
+                TestTowerPlace.X = pX;
+                TestTowerPlace.Y = pY;
+            }
         }
 
         public void newWave()
