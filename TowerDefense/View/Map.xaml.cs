@@ -54,7 +54,7 @@ namespace TowerDefense.View
                 double pX = (int)Math.Round(position.X / 25.0) * 25;
                 double pY = (int)Math.Round(position.Y / 25.0) * 25;
 
-                MapView.moveCursor(Convert.ToInt32(pX), Convert.ToInt32(pY));
+                //MapView.moveCursor(Convert.ToInt32(pX), Convert.ToInt32(pY));
             }
             else
             {

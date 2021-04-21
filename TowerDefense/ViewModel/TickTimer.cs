@@ -9,7 +9,7 @@ using TowerDefense;
 public class TickTimer
 {
 	private DispatcherTimer timer = new DispatcherTimer();
-    public TickTimer()
+    public TickTimer(MapViewModel mapViewModel)
     {
 
     }
