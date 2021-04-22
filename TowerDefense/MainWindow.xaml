@@ -4,9 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TowerDefense"
+        xmlns:views = "clr-namespace:TowerDefense.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="MainWindow" Height="540" Width="800"
+        ResizeMode="NoResize"
+        WindowStyle="SingleBorderWindow"
+        >
+    <Grid x:Name="mainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <views:Map x:Name="MapViewControl" Grid.Column="0"/>
+        <views:UIView x:Name="UIViewControl" Grid.Column="1"/>
+        <Image Source="" Name="customPointer" Width="34" Height="34"/>
     </Grid>
 </Window>

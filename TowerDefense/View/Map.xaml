@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="TowerDefense.View.Map"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TowerDefense.View"
+      xmlns:viewModel = "clr-namespace:TowerDefense.ViewModel" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+      mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300"
+      DataContext="{StaticResource sharedMapViewModel}">
+
+    <Canvas x:Name="myCanvas"  MouseLeftButtonDown="callViewmodelFunction">
+        <Rectangle
+            Fill="Green" Height="500" Width="500"></Rectangle>
+        <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                    <Canvas>
+                        <Rectangle
+                        Width="25"
+                        Height="25"
+                        Fill="SaddleBrown"
+                        Canvas.Left="{Binding X,  UpdateSourceTrigger=PropertyChanged}"
+                        Canvas.Top="{Binding Y,  UpdateSourceTrigger=PropertyChanged}"    >
+                        </Rectangle>
+                    </Canvas>
+                    
+
+                </DataTemplate>
+                </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ItemsControl ItemsSource = "{Binding Path = ActiveTowers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Rectangle
+                        Width="25"
+                        Height="25"
+                        Fill="Blue"
+                        Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged}"
+                        Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged}"    >
+                        </Rectangle>
+                        <TextBlock FontSize="40" Text="{Binding AttackCount, UpdateSourceTrigger=PropertyChanged}" Width="112"></TextBlock>
+                    </Canvas>
+                    
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+
+        <ItemsControl ItemsSource = "{Binding Path = ActiveEnemies, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Image
+                                x:Name="EnemyImg"
+                                Width="25"
+                                Height="25"
+                            Source="{Binding Image, UpdateSourceTrigger=PropertyChanged}"
+                                Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                        </Image>
+                    </Canvas>
+
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Rectangle x:Name="hoverRectangle" Opacity="0.35" Width="25" Height="25" Fill="Blue" Canvas.Left="{Binding TestTowerPlace.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding TestTowerPlace.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></Rectangle>
+        <Grid x:Name="myGrid">
+        </Grid>
+
+    </Canvas>
+   
+
+</UserControl>
