@@ -30,6 +30,7 @@ namespace TowerDefense.ViewModel
         private bool placeTowerModeEnabled = false;
         private BitmapImage coinImage;
         private BitmapImage heartImage;
+        private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
@@ -58,6 +59,7 @@ namespace TowerDefense.ViewModel
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
         public BitmapImage CoinImage { get => coinImage; set => coinImage = value; }
         public BitmapImage HeartImage { get => heartImage; set => heartImage = value; }
+        public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
 
         public void CoinAndHeartImage()
         {

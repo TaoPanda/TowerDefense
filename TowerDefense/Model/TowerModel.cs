@@ -1,6 +1,7 @@
 ﻿using Nest;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -23,6 +24,7 @@ namespace TowerDefense.Model
         private string color;
         private Coordinates cordinate;
         private int attackCount = 0;
+        
 
         public TowerModel(int id, string name, int range, int dmg, int fr, int cost, int lvl, int xp, int size, string color)
         {
@@ -60,6 +62,7 @@ namespace TowerDefense.Model
             } 
         }
 
+
         static double distance(int x1, int y1, int x2, int y2)
         {
             double test = Math.Sqrt(Math.Pow(x2 - x1, 2) +
@@ -78,6 +81,10 @@ namespace TowerDefense.Model
                     attack(enemy, Dmg);
                     
                 }
+            }
+            foreach(EnemyModel deadPerson in MapView.EnemiesToKill)
+            {
+                MapView.ActiveEnemies.Remove(deadPerson);
             }
         }
 
@@ -109,6 +116,13 @@ namespace TowerDefense.Model
             if (enemy.Hp <= 25)
             {
                 enemy.Image = break3;
+            }
+
+            // Enemy Death Method
+            if(enemy.Hp <= 0)
+            {
+                MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
+                MapView.EnemiesToKill.Add(enemy);
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
