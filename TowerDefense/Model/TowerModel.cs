@@ -96,6 +96,8 @@ namespace TowerDefense.Model
 
             AttackCount++;
             enemy.Hp -= damage;
+
+            // This is where the image gets changed, the image depends on the health of the enemy
             if (enemy.Hp <= 75 && enemy.Hp > 50)
             {
                 enemy.Image = break1;
