@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Text;
 using System.Windows.Media.Imaging;
 using TowerDefense.ViewModel;
@@ -53,13 +54,16 @@ namespace TowerDefense.Model
         public int Size { get => size; set => size = value; }
         public string Color { get => color; set => color = value; }
         public Coordinates Cordinate { get => cordinate; set => cordinate = value; }
-        public int AttackCount { get => attackCount; set { 
-                if(attackCount != value)
+        public int AttackCount
+        {
+            get => attackCount; set
+            {
+                if (attackCount != value)
                 {
                     attackCount = value;
                     RaisePropertyChanged("AttackCount");
-                }    
-            } 
+                }
+            }
         }
 
 
@@ -79,7 +83,7 @@ namespace TowerDefense.Model
                 if (distance(cordinate.X / 25, cordinate.Y / 25, enemy.Cordinate.X / 25, enemy.Cordinate.Y / 25) <= range)
                 {
                     attack(enemy, Dmg);
-                    
+
                 }
             }
             foreach(EnemyModel deadPerson in MapView.EnemiesToKill)
@@ -93,8 +97,7 @@ namespace TowerDefense.Model
             // Kinda Fields i think
 
             // Get The directory that your in
-            string replaceMe = AppDomain.CurrentDomain.BaseDirectory;
-            replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
+            string replaceMe = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
 
             // BitmapImages for enemies
             BitmapImage break1 = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break1.png", UriKind.Absolute));
