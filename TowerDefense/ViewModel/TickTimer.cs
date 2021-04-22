@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Threading;
 using TowerDefense.ViewModel;
 using TowerDefense;
+using System.Threading.Tasks;
 
 public class TickTimer
 {
@@ -18,7 +19,7 @@ public class TickTimer
 
     public void startGame()
     {
-		timer.Interval = TimeSpan.FromMilliseconds(250);
+		timer.Interval = TimeSpan.FromMilliseconds(200);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}

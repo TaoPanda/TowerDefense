@@ -36,6 +36,7 @@ namespace TowerDefense.ViewModel
             LoadRoute();
             //Adds debug enemy
             //Starts game
+
             Tick.startGame();
             RoutedEvent[] events = EventManager.GetRoutedEvents();
         }
