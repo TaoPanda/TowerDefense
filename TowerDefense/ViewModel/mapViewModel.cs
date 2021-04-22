@@ -12,6 +12,7 @@ namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
+
         private ObservableCollection<string> test = new ObservableCollection<string>();
         private int wavesCount = 0;
         private int enemiesThisWave = 5;
@@ -27,6 +28,8 @@ namespace TowerDefense.ViewModel
         private PlaceTowerCommand towerCommand;
         private Coordinates testTowerPlace = new Coordinates(0, 0);
         private bool placeTowerModeEnabled = false;
+        private BitmapImage coinImage;
+        private BitmapImage heartImage;
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
@@ -39,6 +42,9 @@ namespace TowerDefense.ViewModel
 
             Tick.startGame();
             RoutedEvent[] events = EventManager.GetRoutedEvents();
+            CoinAndHeartImage();
+
+
         }
         public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }
         public ObservableCollection<string> Route1 { get => this.Route; set => this.Route = value; }
@@ -50,6 +56,17 @@ namespace TowerDefense.ViewModel
         public PlaceTowerCommand TowerCommand { get => towerCommand; set => towerCommand = value; }
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
+        public BitmapImage CoinImage { get => coinImage; set => coinImage = value; }
+        public BitmapImage HeartImage { get => heartImage; set => heartImage = value; }
+
+        public void CoinAndHeartImage()
+        {
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            currentDirectory = currentDirectory.Replace(@"\bin\Debug\netcoreapp3.1", "");
+
+            CoinImage = new BitmapImage(new Uri($@"file:\\\" + $"{currentDirectory}" + @"\images\coin.png", UriKind.Absolute));
+            HeartImage = new BitmapImage(new Uri($@"file:\\\" + $"{currentDirectory}" + @"\images\heart.png", UriKind.Absolute));
+        }
 
         public void moveCursor() {
             if (placeTowerModeEnabled)
