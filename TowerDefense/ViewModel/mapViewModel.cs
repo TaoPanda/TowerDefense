@@ -28,8 +28,6 @@ namespace TowerDefense.ViewModel
         private PlaceTowerCommand towerCommand;
         private Coordinates testTowerPlace = new Coordinates(0, 0);
         private bool placeTowerModeEnabled = false;
-        private BitmapImage coinImage;
-        private BitmapImage heartImage;
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
@@ -42,7 +40,6 @@ namespace TowerDefense.ViewModel
 
             Tick.startGame();
             RoutedEvent[] events = EventManager.GetRoutedEvents();
-            CoinAndHeartImage();
 
 
         }
@@ -56,17 +53,8 @@ namespace TowerDefense.ViewModel
         public PlaceTowerCommand TowerCommand { get => towerCommand; set => towerCommand = value; }
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
-        public BitmapImage CoinImage { get => coinImage; set => coinImage = value; }
-        public BitmapImage HeartImage { get => heartImage; set => heartImage = value; }
+     
 
-        public void CoinAndHeartImage()
-        {
-            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            currentDirectory = currentDirectory.Replace(@"\bin\Debug\netcoreapp3.1", "");
-
-            CoinImage = new BitmapImage(new Uri($@"file:\\\" + $"{currentDirectory}" + @"\images\coin.png", UriKind.Absolute));
-            HeartImage = new BitmapImage(new Uri($@"file:\\\" + $"{currentDirectory}" + @"\images\heart.png", UriKind.Absolute));
-        }
 
         public void moveCursor() {
             if (placeTowerModeEnabled)
@@ -122,7 +110,7 @@ namespace TowerDefense.ViewModel
                 replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
                 Random random = new Random();
                 TotalEnmSpawnTick = random.Next(2, 5);
-                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\notBroken.png", UriKind.Absolute))));
+                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri($@"file:\\\C:\Users\chri45n5\Source\Repos\TowerDefense\TowerDefense\images\notBroken.png", UriKind.Absolute))));
                 RemainingEnmSpawnTick = 0;
                 enemiesThisWave--; 
 

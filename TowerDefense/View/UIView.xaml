@@ -13,9 +13,9 @@
             <Border Canvas.Left="24" Width="135" Height="63" Canvas.Top="15" BorderBrush="Black" BorderThickness="1">
                 <Rectangle Fill="LightGray" Height="61" Margin="1,0,1,0"/>
             </Border>
-            <Image Source="{Binding HeartImage}" Canvas.Top="13" Width="29" Height="34" Canvas.Left="31" />
+            <Image Source="\images\heart.png" Canvas.Top="13" Width="29" Height="34" Canvas.Left="31" />
             <TextBlock TextAlignment="Center" FontSize="20" Text="{Binding PlayerData.Hp, Mode=TwoWay}" Height="24" Width="32" Canvas.Left="60" Canvas.Top="16"/>
-            <Image Source="{Binding CoinImage}" Canvas.Top="35" Width="29" Height="50" Canvas.Left="29" RenderTransformOrigin="0.621,0.933" />
+            <Image Source="\images\coin.png" Canvas.Top="35" Width="29" Height="50" Canvas.Left="29" RenderTransformOrigin="0.621,0.933" />
             <TextBlock TextAlignment="Center"  FontSize="20" Text="{Binding PlayerData.Coins, Mode=TwoWay}" Height="24" Width="32" Canvas.Left="60" Canvas.Top="45"/>
             <Button FontSize="20" Content="Start Next Wave" Canvas.Left="24" Canvas.Top="100"
                      Command = "{Binding SimpleCommand, Source={StaticResource sharedMapViewModel}}" 
