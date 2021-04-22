@@ -28,6 +28,7 @@ namespace TowerDefense.ViewModel
         private PlaceTowerCommand towerCommand;
         private Coordinates testTowerPlace = new Coordinates(0, 0);
         private bool placeTowerModeEnabled = false;
+        private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
@@ -53,7 +54,7 @@ namespace TowerDefense.ViewModel
         public PlaceTowerCommand TowerCommand { get => towerCommand; set => towerCommand = value; }
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
-     
+        public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
 
 
         public void moveCursor() {
