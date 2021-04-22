@@ -6,8 +6,8 @@ using System.Text;
 using TowerDefense.ViewModel.Commands;
 using System.Windows.Input;
 using System.Threading;
+using System.Windows.Media.Imaging;
 using System.Windows;
-
 namespace TowerDefense.ViewModel
 {
     public class MapViewModel
@@ -101,12 +101,15 @@ namespace TowerDefense.ViewModel
         {
             if(RemainingEnmSpawnTick == TotalEnmSpawnTick && enemiesThisWave > 0)
             {
+                string replaceMe = AppDomain.CurrentDomain.BaseDirectory;
+                replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
                 Random random = new Random();
                 TotalEnmSpawnTick = random.Next(2, 5);
-                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0]));
+                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\notBroken.png", UriKind.Absolute))));
                 RemainingEnmSpawnTick = 0;
-                enemiesThisWave--;
-                
+                enemiesThisWave--; 
+
+
             }
             RemainingEnmSpawnTick++;
             if (activeEnemies.Count == 0)
