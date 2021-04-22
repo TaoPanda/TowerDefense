@@ -75,30 +75,38 @@ namespace TowerDefense.Model
             {
                 if (distance(cordinate.X / 25, cordinate.Y / 25, enemy.Cordinate.X / 25, enemy.Cordinate.Y / 25) <= range)
                 {
-                    attack(enemy);
+                    attack(enemy, Dmg);
+                    
                 }
             }
         }
 
-        public void attack(EnemyModel enemy)
+        public void attack(EnemyModel enemy, int damage)
         {
+            // Kinda Fields i think
+
+            // Get The directory that your in
             string replaceMe = AppDomain.CurrentDomain.BaseDirectory;
             replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
+
+            // BitmapImages for enemies
+            BitmapImage break1 = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break1.png", UriKind.Absolute));
+            BitmapImage break2 = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break2.png", UriKind.Absolute));
+            BitmapImage break3 = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break3.png", UriKind.Absolute));
+
             AttackCount++;
-            enemy.Hp--;
-            if(enemy.Hp <= 99)
+            enemy.Hp -= damage;
+            if (enemy.Hp <= 75 && enemy.Hp > 50)
             {
-                BitmapImage myImage = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break1.png", UriKind.Absolute));
-                enemy.Image = myImage;
-            } else if (enemy.Hp <= 50)
-            {
-                BitmapImage myImage = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break2.png", UriKind.Absolute));
-                enemy.Image = myImage;
+                enemy.Image = break1;
             }
-            else if (enemy.Hp <= 25)
+            if (enemy.Hp <= 50 && enemy.Hp > 25)
             {
-                BitmapImage myImage = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break3.png", UriKind.Absolute));
-                enemy.Image = myImage;
+                enemy.Image = break2;
+            }
+            if (enemy.Hp <= 25)
+            {
+                enemy.Image = break3;
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
