@@ -24,11 +24,9 @@
             <Button IsEnabled="{Binding PlayerData.CanPlaceTower, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Content="Place tower" Canvas.Left="22" Canvas.Top="136"
                      Command = "{Binding TowerCommand, Source={StaticResource sharedMapViewModel}}" 
                     CommandParameter = "placetower"
-                    />
+            />
+
         </Canvas>
     </Border>
-
-
-
 
 </UserControl>

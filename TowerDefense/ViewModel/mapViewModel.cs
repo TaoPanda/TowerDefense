@@ -25,13 +25,16 @@ namespace TowerDefense.ViewModel
         private TickTimer Tick;
         private PlayerDataModel playerData;
         private SimpleCommand simpleCommand;
+        private ResetGame resetGame;
         private PlaceTowerCommand towerCommand;
         private Coordinates testTowerPlace = new Coordinates(0, 0);
         private bool placeTowerModeEnabled = false;
         private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
+        private bool popup = false;
         public MapViewModel(){
             PlayerData = new PlayerDataModel(3, 0);
             this.simpleCommand = new SimpleCommand(this);
+            this.resetGame = new ResetGame(this);
             this.towerCommand = new PlaceTowerCommand(this);
             //Creates tick object
             Tick = new TickTimer(this);
@@ -55,7 +58,8 @@ namespace TowerDefense.ViewModel
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
         public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
-
+        public ResetGame ResetGame { get => resetGame; set => resetGame = value; }
+        public bool Popup { get => popup; set => popup = value; }
 
         public void moveCursor() {
             if (placeTowerModeEnabled)
@@ -80,18 +84,20 @@ namespace TowerDefense.ViewModel
             PlayerData.Hp--;
             if(PlayerData.Hp == 0)
             {
+                PlayerData.PopupIsOpen = true;
                 Tick.gameOver();
             }
         }
 
         public void GameOver()
         {
-            wavesCount = 0;
+            wavesCount = 1;
             ActiveEnemies.Clear();
             activeTowers.Clear();
             PlayerData.Hp = 100;
             PlayerData.Round = 1;
-            PlayerData.Coins = 0;
+            PlayerData.Coins = 50;
+            PlayerData.PopupIsOpen = false;
         }
 
         public void TowerTick()
@@ -180,7 +186,6 @@ namespace TowerDefense.ViewModel
                     HealthLoss();
                     if(PlayerData.Hp <= 0)
                     {
-                        GameOver();
                         break;
                     }
                 }
