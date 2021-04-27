@@ -28,11 +28,14 @@ namespace TowerDefense.ViewModel
         private ResetGame resetGame;
         private PlaceTowerCommand towerCommand;
         private Coordinates testTowerPlace = new Coordinates(0, 0);
+        private Coordinates rangeTowerPlace = new Coordinates(0, 0);
+        private Coordinates rangeTowerDimensions = new Coordinates(75, 75);
         private bool placeTowerModeEnabled = false;
         private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
-        public MapViewModel()
-        {
-            PlayerData = new PlayerDataModel(3, 0);
+        private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 2, 1, 1, 1, 1, 1, 1, "blue");
+      
+        public MapViewModel(){
+            PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             this.resetGame = new ResetGame(this);
@@ -59,7 +62,8 @@ namespace TowerDefense.ViewModel
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
         public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
-
+        public Coordinates RangeTowerPlace { get => rangeTowerPlace; set => rangeTowerPlace = value; }
+        public Coordinates RangeTowerDimensions { get => rangeTowerDimensions; set => rangeTowerDimensions = value; }
 
         public void moveCursor()
         {
@@ -70,7 +74,15 @@ namespace TowerDefense.ViewModel
                 int pY = (int)Math.Round(position.Y / 25.0) * 25;
                 TestTowerPlace.X = pX;
                 TestTowerPlace.Y = pY;
+                moveRangeCursor();
             }
+        }
+        public void moveRangeCursor()
+        {
+            RangeTowerPlace.X = TestTowerPlace.X - (selectedTower.Range * 25);
+            RangeTowerPlace.Y = TestTowerPlace.Y - (selectedTower.Range * 25);
+            RangeTowerDimensions.X = ((selectedTower.Range * 25) * 2) + 25;
+            RangeTowerDimensions.Y = ((selectedTower.Range * 25) * 2) + 25;
         }
 
         public void newWave()
@@ -132,7 +144,8 @@ namespace TowerDefense.ViewModel
                 replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
                 Random random = new Random();
                 TotalEnmSpawnTick = random.Next(2, 5);
-                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri($@"file:\\\C:\Users\nico936d\Documents\S-3\TowerDefense\TowerDefense\images\notBroken.png", UriKind.Absolute))));
+
+                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri("/images/notBroken.png", UriKind.Relative))));
                 RemainingEnmSpawnTick = 0;
                 enemiesThisWave--;
 
