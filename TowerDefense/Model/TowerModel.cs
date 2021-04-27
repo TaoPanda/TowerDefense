@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -45,12 +46,32 @@ namespace TowerDefense.Model
         [Key]
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
-        public int Range { get => range; set => range = value; }
+        public int Range
+        {
+            get => range; set
+            {
+                if (range != value)
+                {
+                    range = value;
+                    RaisePropertyChanged("Range");
+                }
+            }
+        }
         public int Dmg { get => dmg; set => dmg = value; }
         public int Fr { get => fr; set => fr = value; }
         public int Cost { get => cost; set => cost = value; }
         public int Lvl { get => lvl; set => lvl = value; }
-        public int Xp { get => xp; set => xp = value; }
+        public int Xp
+        {
+            get => xp; set
+            {
+                if (xp != value)
+                {
+                    xp = value;
+                    RaisePropertyChanged("Xp");
+                }
+            }
+        }
         public int Size { get => size; set => size = value; }
         public string Color { get => color; set => color = value; }
         public Coordinates Cordinate { get => cordinate; set => cordinate = value; }
@@ -87,7 +108,7 @@ namespace TowerDefense.Model
         }
         */
 
-        public void checkRange()
+        public void checkRange(TowerModel tower)
         {
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
             foreach (EnemyModel enemy in MapView.ActiveEnemies)
@@ -97,7 +118,8 @@ namespace TowerDefense.Model
                    enemy.Cordinate.X / 25 <= ((cordinate.X / 25) + range) &&
                    enemy.Cordinate.Y / 25 <= ((cordinate.Y / 25) + range))
                 {
-                    attack(enemy, Dmg);
+                    attack(enemy, tower);
+                    Debug.WriteLine(tower.range);
                 }
                 /*
                 if (distance(cordinate.X / 25, cordinate.Y / 25, enemy.Cordinate.X / 25, enemy.Cordinate.Y / 25) <= range)
@@ -115,7 +137,7 @@ namespace TowerDefense.Model
             }
         }
 
-        public void attack(EnemyModel enemy, int damage)
+        public void attack(EnemyModel enemy, TowerModel tower)
         {
             // Kinda Fields i think
 
@@ -128,7 +150,7 @@ namespace TowerDefense.Model
             BitmapImage break3 = new BitmapImage(new Uri($@"file:\\\" + $"{replaceMe}" + @"\images\break3.png", UriKind.Absolute));
 
             AttackCount++;
-            enemy.Hp -= damage;
+            enemy.Hp -= tower.Dmg;
 
             // This is where the image gets changed, the image depends on the health of the enemy
             if (enemy.Hp <= 75 && enemy.Hp > 50)
@@ -147,6 +169,24 @@ namespace TowerDefense.Model
             // Enemy Death Method
             if(enemy.Hp <= 0)
             {
+                tower.Xp *= 2;
+                if(tower.Xp < 100)
+                {
+                    tower.range = 1;
+                }
+                else if(tower.Xp >= 100 && tower.Xp !> 500)
+                {
+                    tower.range = 2;
+                }
+                else if(tower.Xp >= 500 && tower.Xp !> 7500)
+                {
+                    tower.range = 3;
+                }
+                else if(tower.Xp >= 7500)
+                {
+                    tower.range = 4;
+                }
+                
                 MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
                 MapView.EnemiesToKill.Add(enemy);
             }
