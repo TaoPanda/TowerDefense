@@ -12,7 +12,6 @@ namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
-
         private ObservableCollection<string> test = new ObservableCollection<string>();
         private int wavesCount = 0;
         private int enemiesThisWave = 5;
@@ -20,8 +19,10 @@ namespace TowerDefense.ViewModel
         private int RemainingEnmSpawnTick = 0;
         private ObservableCollection<TowerModel> activeTowers = new ObservableCollection<TowerModel>();
         private ObservableCollection<EnemyModel> activeEnemies = new ObservableCollection<EnemyModel>();
+        private ObservableCollection<Coordinates> activeRocks = new ObservableCollection<Coordinates>();
         private ObservableCollection<string> Route = new ObservableCollection<string>();
         private ObservableCollection<Coordinates> positionRoute = new ObservableCollection<Coordinates>();
+        private ViewVisibillityModel towerHover = new ViewVisibillityModel();
         private TickTimer Tick;
         private PlayerDataModel playerData;
         private SimpleCommand simpleCommand;
@@ -33,7 +34,6 @@ namespace TowerDefense.ViewModel
         private bool placeTowerModeEnabled = false;
         private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
         private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 1, 1, 1, 1, 1, 1, 1, "blue");
-      
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
@@ -44,10 +44,13 @@ namespace TowerDefense.ViewModel
             LoadRoute();
             //Adds debug enemy
             //Starts game
-
             Tick.startGame();
             RoutedEvent[] events = EventManager.GetRoutedEvents();
-
+            TowerHover.TowerHoverVisibillity = 0.0;
+            for (int i = 0; i < 5; i++)
+            {
+                GenerateRockFormations();
+            }
 
         }
         public PlayerDataModel PlayerData { get => playerData; set => playerData = value; }
@@ -64,6 +67,9 @@ namespace TowerDefense.ViewModel
         public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
         public Coordinates RangeTowerPlace { get => rangeTowerPlace; set => rangeTowerPlace = value; }
         public Coordinates RangeTowerDimensions { get => rangeTowerDimensions; set => rangeTowerDimensions = value; }
+        public ObservableCollection<Coordinates> ActiveRocks { get => activeRocks; set => activeRocks = value; }
+        public ViewVisibillityModel TowerHover { get => towerHover; set => towerHover = value; }
+        public TowerModel SelectedTower { get => selectedTower; set => selectedTower = value; }
         public int WavesCount { get => wavesCount; set => wavesCount = value; }
 
         public void moveCursor()
@@ -80,10 +86,10 @@ namespace TowerDefense.ViewModel
         }
         public void moveRangeCursor()
         {
-            RangeTowerPlace.X = TestTowerPlace.X - (selectedTower.Range * 25);
-            RangeTowerPlace.Y = TestTowerPlace.Y - (selectedTower.Range * 25);
-            RangeTowerDimensions.X = ((selectedTower.Range * 25) * 2) + 25;
-            RangeTowerDimensions.Y = ((selectedTower.Range * 25) * 2) + 25;
+            RangeTowerPlace.X = TestTowerPlace.X - (SelectedTower.Range * 25);
+            RangeTowerPlace.Y = TestTowerPlace.Y - (SelectedTower.Range * 25);
+            RangeTowerDimensions.X = ((SelectedTower.Range * 25) * 2) + 25;
+            RangeTowerDimensions.Y = ((SelectedTower.Range * 25) * 2) + 25;
         }
 
         public void newWave()
@@ -91,6 +97,12 @@ namespace TowerDefense.ViewModel
             wavesCount++;
             enemiesThisWave = Convert.ToInt32(5 + Math.Floor(wavesCount * 1.5));
             RemainingEnmSpawnTick = 0;
+
+            activeRocks.Clear();
+            for (int i = 0; i < 5; i++)
+            {
+                GenerateRockFormations();
+            }
             SpawnInterval();
         }
 
@@ -162,7 +174,31 @@ namespace TowerDefense.ViewModel
                 playerData.CanPlaceTower = false;
             }
         }
+        private void GenerateRockFormations()
+        {
+            
+            int x = 0;
+            int y = 0;
+            Random rnd = new Random();
+            while (true)
+            {
+                x = rnd.Next(0, 20);
+                y = rnd.Next(0, 20);
+                if (isCellEmpty(new Coordinates(x, y)))
+                {
+                    break;
+                }
+            }
+            List<Point> posibleRockLocations = getSurroundingCells(new Point(x, y), 3);
+            foreach (Point element in  posibleRockLocations)
+            {
+                if(rnd.Next(0, 2) == 1)
+                {
+                    activeRocks.Add(new Coordinates(Convert.ToInt32(element.X * 25), Convert.ToInt32(element.Y * 25)));
+                }
+            }
 
+        }
         private void GenerateRoute()
         {
             //Generates the enemy route from given coordinates 
@@ -172,6 +208,19 @@ namespace TowerDefense.ViewModel
 
                 PositionRoute.Add(new Coordinates(cords[1], cords[0]));
             }
+        }
+
+        public List<Point> getSurroundingCells(Point fromLocation, int Distance)
+        {
+
+            var nearbySpots = new List<Point>();
+
+            for (int i = -Distance; i <= Distance; ++i)
+                for (int j = -Distance; j <= Distance; ++j)
+                    nearbySpots.Add(new Point(fromLocation.X + j, fromLocation.Y + i));
+
+            return nearbySpots;
+
         }
 
         private int[] GetCenterOfCell(string cordinat, int cellSize)
@@ -231,6 +280,13 @@ namespace TowerDefense.ViewModel
             foreach (TowerModel towerCords in activeTowers)
             {
                 if (towerCords.Cordinate.X == coordinates.X && towerCords.Cordinate.Y == coordinates.Y)
+                {
+                    return false;
+                }
+            }
+            foreach(Coordinates rocks in activeRocks)
+            {
+                if(rocks.X == coordinates.X && rocks.Y == coordinates.Y)
                 {
                     return false;
                 }

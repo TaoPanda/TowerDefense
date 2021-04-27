@@ -22,6 +22,23 @@
 
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
+        <ItemsControl ItemsSource = "{Binding Path = ActiveRocks}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Rectangle
+                        Width="25"
+                        Height="25"
+                        Fill="DarkGray"
+                        Canvas.Left="{Binding X,  UpdateSourceTrigger=PropertyChanged}"
+                        Canvas.Top="{Binding Y,  UpdateSourceTrigger=PropertyChanged}"    >
+                        </Rectangle>
+                    </Canvas>
+
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -66,6 +83,7 @@
                 <DataTemplate>
                     <Canvas>
                         <Image
+        
                                 x:Name="EnemyImg"
                                 Width="25"
                                 Height="25"
@@ -79,8 +97,10 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Rectangle x:Name="rangeHoverRectangle" Opacity="0.35" Canvas.Left="{Binding RangeTowerPlace.X, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding RangeTowerPlace.Y, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="{Binding RangeTowerDimensions.X, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Height="{Binding RangeTowerDimensions.Y, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Fill="Red"></Rectangle>
-        <Rectangle x:Name="hoverRectangle" Opacity="0.35" Width="25" Height="25" Fill="Blue" Canvas.Left="{Binding TestTowerPlace.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding TestTowerPlace.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></Rectangle>
+
+        <Rectangle  Opacity="{Binding TowerHover.TowerHoverVisibillity}" Canvas.Left="{Binding RangeTowerPlace.X, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding RangeTowerPlace.Y, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="{Binding RangeTowerDimensions.X, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Height="{Binding RangeTowerDimensions.Y, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Fill="Red">
+        </Rectangle>
+        <Rectangle Opacity="{Binding TowerHover.TowerHoverVisibillity}" x:Name="hoverRectangle" Width="25" Height="25" Fill="Blue" Canvas.Left="{Binding TestTowerPlace.X,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Top="{Binding TestTowerPlace.Y,  UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></Rectangle>
         <Grid x:Name="myGrid">
         </Grid>
 
