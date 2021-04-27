@@ -64,6 +64,7 @@ namespace TowerDefense.ViewModel
         public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
         public Coordinates RangeTowerPlace { get => rangeTowerPlace; set => rangeTowerPlace = value; }
         public Coordinates RangeTowerDimensions { get => rangeTowerDimensions; set => rangeTowerDimensions = value; }
+        public int WavesCount { get => wavesCount; set => wavesCount = value; }
 
         public void moveCursor()
         {

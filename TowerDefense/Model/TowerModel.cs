@@ -119,7 +119,7 @@ namespace TowerDefense.Model
                    enemy.Cordinate.Y / 25 <= ((cordinate.Y / 25) + range))
                 {
                     attack(enemy, tower);
-                    Debug.WriteLine(tower.range);
+                    Debug.WriteLine(tower.Lvl);
                 }
                 /*
                 if (distance(cordinate.X / 25, cordinate.Y / 25, enemy.Cordinate.X / 25, enemy.Cordinate.Y / 25) <= range)
@@ -139,6 +139,7 @@ namespace TowerDefense.Model
 
         public void attack(EnemyModel enemy, TowerModel tower)
         {
+            MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
             // Kinda Fields i think
 
             // Get The directory that your in
@@ -151,6 +152,7 @@ namespace TowerDefense.Model
 
             AttackCount++;
             enemy.Hp -= tower.Dmg;
+            
 
             // This is where the image gets changed, the image depends on the health of the enemy
             if (enemy.Hp <= 75 && enemy.Hp > 50)
@@ -166,28 +168,34 @@ namespace TowerDefense.Model
                 enemy.Image = break3;
             }
 
+            if(tower.Xp >= tower.Lvl * 35)
+            {
+                tower.Lvl++;
+            }
+
             // Enemy Death Method
+            
             if(enemy.Hp <= 0)
             {
-                tower.Xp *= 2;
-                if(tower.Xp < 100)
+                tower.Xp += Convert.ToInt32(Math.Round(MapView.WavesCount * 1.5));
+                if(tower.Lvl < 5 )
                 {
                     tower.range = 1;
                 }
-                else if(tower.Xp >= 100 && tower.Xp !> 500)
+                else if(tower.Lvl >= 5 && tower.Lvl < 20)
                 {
                     tower.range = 2;
                 }
-                else if(tower.Xp >= 500 && tower.Xp !> 7500)
+                else if(tower.Lvl >= 20 && tower.Lvl < 45)
                 {
                     tower.range = 3;
                 }
-                else if(tower.Xp >= 7500)
+                else if(tower.Lvl >= 45)
                 {
                     tower.range = 4;
                 }
                 
-                MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
+                
                 MapView.EnemiesToKill.Add(enemy);
             }
         }
