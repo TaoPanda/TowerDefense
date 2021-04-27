@@ -32,7 +32,7 @@ namespace TowerDefense.ViewModel
         private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
         private bool popup = false;
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(3, 0);
+            PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
             this.resetGame = new ResetGame(this);
             this.towerCommand = new PlaceTowerCommand(this);
@@ -89,17 +89,6 @@ namespace TowerDefense.ViewModel
             }
         }
 
-        public void GameOver()
-        {
-            wavesCount = 1;
-            ActiveEnemies.Clear();
-            activeTowers.Clear();
-            PlayerData.Hp = 100;
-            PlayerData.Round = 1;
-            PlayerData.Coins = 50;
-            PlayerData.PopupIsOpen = false;
-        }
-
         public void TowerTick()
         {
             foreach (TowerModel tower in activeTowers)
@@ -127,7 +116,7 @@ namespace TowerDefense.ViewModel
                 replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
                 Random random = new Random();
                 TotalEnmSpawnTick = random.Next(2, 5);
-                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri($@"file:\\\C:\Users\nico936d\Documents\S-3\TowerDefense\TowerDefense\images\notBroken.png", UriKind.Absolute))));
+                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri($@"file:\\\C:\Users\chri45n5\Source\Repos\TowerDefense\TowerDefense\images\notBroken.png", UriKind.Absolute))));
                 RemainingEnmSpawnTick = 0;
                 enemiesThisWave--; 
 
@@ -171,7 +160,6 @@ namespace TowerDefense.ViewModel
             //Moves all active enenies and deletes them when they reach the end
             List<int> removeIndex = new List<int>();
             int remove = 0;
-
             foreach(EnemyModel enemy in ActiveEnemies)
             {
                 enemy.NextPosition();
@@ -184,19 +172,12 @@ namespace TowerDefense.ViewModel
                 {
                     removeIndex.Add(remove);
                     HealthLoss();
-                    if(PlayerData.Hp <= 0)
-                    {
-                        break;
-                    }
                 }
                 remove++;
             }
-            if(ActiveEnemies.Count > 0)
+            foreach(int index in removeIndex)
             {
-                foreach(int index in removeIndex)
-                {
-                    ActiveEnemies.RemoveAt(index);
-                }
+                ActiveEnemies.RemoveAt(index);
             }
         }
         public bool isCellEmpty(Coordinates coordinates)
