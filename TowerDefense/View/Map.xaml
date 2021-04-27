@@ -10,6 +10,14 @@
       DataContext="{StaticResource sharedMapViewModel}">
 
     <Canvas x:Name="myCanvas"  MouseLeftButtonDown="callViewmodelFunction">
+
+        <Popup Margin="10,10,0,13" Name="Popup1" Width="194" Height="100" IsOpen="{Binding PlayerData.PopupIsOpen, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="770" Canvas.Top="332" Placement="Center">
+            <StackPanel Background="Blue">
+
+                <Button Content="Start new game" Command="{Binding ResetGame, Source={StaticResource sharedMapViewModel}}" />
+            </StackPanel>
+        </Popup>
+
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
         <ItemsControl ItemsSource = "{Binding Path = PositionRoute}">

@@ -25,6 +25,7 @@ namespace TowerDefense.ViewModel
         private TickTimer Tick;
         private PlayerDataModel playerData;
         private SimpleCommand simpleCommand;
+        private ResetGame resetGame;
         private PlaceTowerCommand towerCommand;
         private Coordinates testTowerPlace = new Coordinates(0, 0);
         private bool placeTowerModeEnabled = false;
@@ -34,6 +35,7 @@ namespace TowerDefense.ViewModel
             PlayerData = new PlayerDataModel(3, 0);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
+            this.resetGame = new ResetGame(this);
             //Creates tick object
             Tick = new TickTimer(this);
             LoadRoute();
@@ -53,6 +55,7 @@ namespace TowerDefense.ViewModel
         public SimpleCommand SimpleCommand { get => simpleCommand; set => simpleCommand = value; }
         public ObservableCollection<TowerModel> ActiveTowers { get => activeTowers; set => activeTowers = value; }
         public PlaceTowerCommand TowerCommand { get => towerCommand; set => towerCommand = value; }
+        public ResetGame ResetGame { get => resetGame; set => resetGame = value; }
         public Coordinates TestTowerPlace { get => testTowerPlace; set => testTowerPlace = value; }
         public bool PlaceTowerModeEnabled { get => placeTowerModeEnabled; set => placeTowerModeEnabled = value; }
         public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
@@ -83,6 +86,7 @@ namespace TowerDefense.ViewModel
             PlayerData.Hp--;
             if (PlayerData.Hp == 0)
             {
+                PlayerData.PopupIsOpen = true;
                 Tick.gameOver();
             }
         }
@@ -97,6 +101,7 @@ namespace TowerDefense.ViewModel
             PlayerData.Coins = 0;
             RemainingEnmSpawnTick = 0;
             TotalEnmSpawnTick = 0;
+            PlayerData.PopupIsOpen = false;
             Tick.startGame();
         }
 
@@ -186,7 +191,7 @@ namespace TowerDefense.ViewModel
                     HealthLoss();
                     if (PlayerData.Hp <= 0)
                     {
-                        GameOver();
+                        PlayerData.PopupIsOpen = true;
                         break;
                     }
                 }
