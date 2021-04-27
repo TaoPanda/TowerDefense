@@ -35,7 +35,7 @@ namespace TowerDefense.ViewModel
         private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 2, 1, 1, 1, 1, 1, 1, "blue");
       
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(100, 0);
+            PlayerData = new PlayerDataModel(3, 0);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             this.resetGame = new ResetGame(this);
