@@ -32,10 +32,10 @@ namespace TowerDefense.ViewModel
         private Coordinates rangeTowerDimensions = new Coordinates(75, 75);
         private bool placeTowerModeEnabled = false;
         private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
-        private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 2, 1, 1, 1, 1, 1, 1, "blue");
+        private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 1, 1, 1, 1, 1, 1, 1, "blue");
       
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(3, 0);
+            PlayerData = new PlayerDataModel(100, 0);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             this.resetGame = new ResetGame(this);
@@ -64,6 +64,7 @@ namespace TowerDefense.ViewModel
         public ObservableCollection<EnemyModel> EnemiesToKill { get => enemiesToKill; set => enemiesToKill = value; }
         public Coordinates RangeTowerPlace { get => rangeTowerPlace; set => rangeTowerPlace = value; }
         public Coordinates RangeTowerDimensions { get => rangeTowerDimensions; set => rangeTowerDimensions = value; }
+        public int WavesCount { get => wavesCount; set => wavesCount = value; }
 
         public void moveCursor()
         {
@@ -121,7 +122,7 @@ namespace TowerDefense.ViewModel
         {
             foreach (TowerModel tower in activeTowers)
             {
-                tower.checkRange();
+                tower.checkRange(tower);
             }
         }
 
