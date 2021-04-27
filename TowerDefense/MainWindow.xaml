@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <views:Map x:Name="MapViewControl" Grid.Column="0"/>
-        <views:UIView x:Name="UIViewControl" Grid.Column="1"/>
+        <views:UIView x:Name="UIViewControl" Grid.Column="1" Background="White"/>
         <Image Source="" Name="customPointer" Width="34" Height="34"/>
     </Grid>
 </Window>

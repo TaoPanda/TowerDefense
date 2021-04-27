@@ -29,6 +29,7 @@ namespace TowerDefense.ViewModel.Commands
             else
             {
                 this.viewModel.PlaceTowerModeEnabled = true;
+                this.viewModel.TowerHover.TowerHoverVisibillity = 0.35;
             }
         }
 
