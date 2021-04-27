@@ -11,12 +11,25 @@ namespace TowerDefense.Model
         private int coins;
         private int round;
         private bool canPlaceTower = false;
+        private bool popupIsOpen = false;
 
         public PlayerDataModel(int hp, int coins)
         {
             Hp = hp;
             Coins = coins;
             Round = 0;
+        }
+
+        public bool PopupIsOpen
+        {
+            get => popupIsOpen; set
+            {
+                if (popupIsOpen != value)
+                {
+                    popupIsOpen = value;
+                    RaisePropertyChanged("PopupIsOpen");
+                }
+            }
         }
 
         public int Hp { get => hp; set { 

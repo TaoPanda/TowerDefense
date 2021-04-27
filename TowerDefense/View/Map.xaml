@@ -10,6 +10,16 @@
       DataContext="{StaticResource sharedMapViewModel}">
 
     <Canvas x:Name="myCanvas"  MouseLeftButtonDown="callViewmodelFunction">
+
+        <Popup Margin="10,10,0,13" Name="Popup1" Width="194" Height="75" IsOpen="{Binding PlayerData.PopupIsOpen, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="770" Canvas.Top="332" Placement="Center">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <StackPanel Background="White">
+                    <TextBlock Text="You winning son?" Foreground="Black" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <Button Content="Start new game" Command="{Binding ResetGame, Source={StaticResource sharedMapViewModel}}" Width="100" />
+                </StackPanel>
+            </Border>
+        </Popup>
+
         <Rectangle
             Fill="Green" Height="500" Width="500"></Rectangle>
         <ItemsControl ItemsSource = "{Binding Path = ActiveRocks}">
@@ -58,7 +68,7 @@
                         Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged}"
                         Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged}"    >
                         </Rectangle>
-                        <TextBlock FontSize="40" Text="{Binding AttackCount, UpdateSourceTrigger=PropertyChanged}" Width="112"></TextBlock>
+                        <TextBlock FontSize="40" Text="{Binding Lvl, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </Canvas>
                     
 
