@@ -50,7 +50,7 @@ namespace TowerDefense.View
             if (MapView.PlaceTowerModeEnabled)
             {
                 Point position = Mouse.GetPosition(myCanvas);
-                TowerModel testTower = new TowerModel(1, "test", 2, 5, 1, 1, 1, 1, 1, "blue");
+                TowerModel testTower = new TowerModel(1, "test", 3, 5, 1, 1, 1, 1, 1, "blue");
                 int pX = (int)Math.Round(position.X / 25.0) * 25;
                 int pY = (int)Math.Round(position.Y / 25.0) * 25;
                 testTower.Cordinate = new Coordinates(pX, pY);

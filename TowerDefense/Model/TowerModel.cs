@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using TowerDefense.ViewModel;
 
@@ -39,7 +40,6 @@ namespace TowerDefense.Model
             this.xp = xp;
             this.size = size;
             this.color = color;
-            distance(1, 1, 4, 2);
         }
 
         [Key]
@@ -66,25 +66,48 @@ namespace TowerDefense.Model
             }
         }
 
-
+        /*
         static double distance(int x1, int y1, int x2, int y2)
         {
+
+
+
+
+            
+            Point point1 = new Point(x1, y1);
+            Point point2 = new Point(y2, y2);
+
+
+            return Point.Subtract(point1, point2).Length;
+
             double test = Math.Sqrt(Math.Pow(x2 - x1, 2) +
                           Math.Pow(y2 - y1, 2) * 1.0);
             double final = Math.Round((test * 100000.0) / 100000);
             return final;
         }
+        */
 
         public void checkRange()
         {
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
             foreach (EnemyModel enemy in MapView.ActiveEnemies)
             {
+                if(enemy.Cordinate.X / 25 >= ((cordinate.X / 25) - range) && 
+                   enemy.Cordinate.Y / 25 >= ((cordinate.Y / 25) - range) &&
+                   enemy.Cordinate.X / 25 <= ((cordinate.X / 25) + range) &&
+                   enemy.Cordinate.Y / 25 <= ((cordinate.Y / 25) + range))
+                {
+                    attack(enemy, Dmg);
+                }
+                /*
                 if (distance(cordinate.X / 25, cordinate.Y / 25, enemy.Cordinate.X / 25, enemy.Cordinate.Y / 25) <= range)
                 {
                     attack(enemy, Dmg);
 
-                }
+                }*/
+
+
+
             }
             foreach(EnemyModel deadPerson in MapView.EnemiesToKill)
             {
