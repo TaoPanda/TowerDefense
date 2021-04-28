@@ -192,7 +192,7 @@ namespace TowerDefense.Model
                 tower.Xp += Convert.ToInt32(Math.Round(MapView.WavesCount * 1.5));
                 if(tower.Lvl < 5 )
                 {
-                    tower.range = 2;
+                    tower.range = 1;
                 }
                 else if(tower.Lvl >= 5 && tower.Lvl < 20)
                 {
