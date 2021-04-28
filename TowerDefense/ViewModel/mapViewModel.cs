@@ -44,6 +44,7 @@ namespace TowerDefense.ViewModel
             //Creates tick object
             Tick = new TickTimer(this);
             LoadRoute();
+            StartGame();
             //Adds debug enemy
             //Starts game
             RoutedEvent[] events = EventManager.GetRoutedEvents();
