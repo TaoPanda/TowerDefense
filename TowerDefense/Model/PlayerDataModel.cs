@@ -10,7 +10,7 @@ namespace TowerDefense.Model
         private int hp;
         private double coins;
         private int round;
-        private bool canPlaceTower = false;
+        private bool canPlaceTower = true;
         private bool popupIsOpen = false;
 
         public PlayerDataModel(int hp, double coins)

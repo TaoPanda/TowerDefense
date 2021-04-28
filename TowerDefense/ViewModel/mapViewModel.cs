@@ -46,6 +46,7 @@ namespace TowerDefense.ViewModel
             LoadRoute();
             //Adds debug enemy
             //Starts game
+            RoutedEvent[] events = EventManager.GetRoutedEvents();
             Tick.StartGame();
             TowerHover.TowerHoverVisibillity = 0.0;
             for (int i = 0; i < 5; i++)
@@ -74,7 +75,13 @@ namespace TowerDefense.ViewModel
         public int WavesCount { get => wavesCount; set => wavesCount = value; }
         public TowerModel SelectedUITower { get => selectedUITower; set => selectedUITower = value; }
 
-        public void MoveCursor()
+        public void StartGame()
+        {
+            Tick.startGame();
+
+        }
+
+        public void moveCursor()
         {
             if (placeTowerModeEnabled)
             {
