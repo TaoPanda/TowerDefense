@@ -7,10 +7,10 @@ namespace TowerDefense.ViewModel.Commands
 {
     public class SimpleCommand : ICommand
     {
-        public MapViewModel viewModel { get; set; } 
+        public MapViewModel ViewModel { get; set; } 
         public  SimpleCommand(MapViewModel mapViewModel)
         {
-            this.viewModel = mapViewModel;
+            this.ViewModel = mapViewModel;
         }
         public event EventHandler CanExecuteChanged;
 

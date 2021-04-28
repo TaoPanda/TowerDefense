@@ -14,7 +14,6 @@ namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
-        private ObservableCollection<string> test = new ObservableCollection<string>();
         private int wavesCount = 0;
         private int enemiesThisWave = 5;
         private int TotalEnmSpawnTick = 0;
@@ -25,7 +24,7 @@ namespace TowerDefense.ViewModel
         private ObservableCollection<string> Route = new ObservableCollection<string>();
         private ObservableCollection<Coordinates> positionRoute = new ObservableCollection<Coordinates>();
         private ViewVisibillityModel towerHover = new ViewVisibillityModel();
-        private TickTimer Tick;
+        private readonly TickTimer Tick;
         private PlayerDataModel playerData;
         private SimpleCommand simpleCommand;
         private ResetGame resetGame;
@@ -38,7 +37,7 @@ namespace TowerDefense.ViewModel
         private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 1, 1, 1, 1, 1, 1, 1, "blue");
         private TowerModel selectedUITower;
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(100, 50);
+            PlayerData = new PlayerDataModel(100, 5000);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             this.resetGame = new ResetGame(this);
@@ -48,6 +47,7 @@ namespace TowerDefense.ViewModel
             //Adds debug enemy
             //Starts game
             RoutedEvent[] events = EventManager.GetRoutedEvents();
+            Tick.StartGame();
             TowerHover.TowerHoverVisibillity = 0.0;
             for (int i = 0; i < 5; i++)
             {
@@ -90,10 +90,10 @@ namespace TowerDefense.ViewModel
                 int pY = (int)Math.Round(position.Y / 25.0) * 25;
                 TestTowerPlace.X = pX;
                 TestTowerPlace.Y = pY;
-                moveRangeCursor();
+                MoveRangeCursor();
             }
         }
-        public void moveRangeCursor()
+        public void MoveRangeCursor()
         {
             RangeTowerPlace.X = TestTowerPlace.X - (SelectedTower.Range * 25);
             RangeTowerPlace.Y = TestTowerPlace.Y - (SelectedTower.Range * 25);
@@ -101,7 +101,7 @@ namespace TowerDefense.ViewModel
             RangeTowerDimensions.Y = ((SelectedTower.Range * 25) * 2) + 25;
         }
 
-        public void newWave()
+        public void NewWave()
         {
             wavesCount++;
             enemiesThisWave = Convert.ToInt32(5 + Math.Floor(wavesCount * 1.5));
@@ -121,7 +121,7 @@ namespace TowerDefense.ViewModel
             if (PlayerData.Hp == 0)
             {
                 PlayerData.PopupIsOpen = true;
-                Tick.gameOver();
+                Tick.GameOver();
             }
         }
 
@@ -136,34 +136,30 @@ namespace TowerDefense.ViewModel
             RemainingEnmSpawnTick = 0;
             TotalEnmSpawnTick = 0;
             PlayerData.PopupIsOpen = false;
-            Tick.startGame();
+            Tick.StartGame();
         }
 
         public void TowerTick()
         {
             foreach (TowerModel tower in activeTowers)
             {
-                tower.checkRange(tower);
+                tower.CheckRange(tower);
             }
         }
 
         public void LoadRoute()
         {
-            using (var context = new TowerDefenseContext())
-            {
+            using var context = new TowerDefenseContext();
 
-                foreach (var row in context.Route)
-                    Route.Add(row.Y.ToString() + "." + row.X.ToString());
-                GenerateRoute();
-            }
+            foreach (var row in context.Route)
+                Route.Add(row.Y.ToString() + "." + row.X.ToString());
+            GenerateRoute();
 
         }
         public void SpawnInterval()
         {
             if (RemainingEnmSpawnTick == TotalEnmSpawnTick && enemiesThisWave > 0)
             {
-                string replaceMe = AppDomain.CurrentDomain.BaseDirectory;
-                replaceMe = replaceMe.Replace(@"\bin\Debug\netcoreapp3.1", "");
                 Random random = new Random();
                 TotalEnmSpawnTick = random.Next(2, 5);
 
@@ -174,31 +170,38 @@ namespace TowerDefense.ViewModel
 
             }
             RemainingEnmSpawnTick++;
+            
+            
+
+
+            // hele tower placement systemet crasher før vi fjerner UI elementerne fra MapView
             if (activeEnemies.Count == 0 && PlayerData.Coins >= 5 * (ActiveTowers.Count + 1))
             {
                 playerData.CanPlaceTower = true;
+                //Husk at implementere visibilitty
             }
             else
             {
                 playerData.CanPlaceTower = false;
+                TowerHover.TowerHoverVisibillity = 0.0;
             }
         }
         private void GenerateRockFormations()
         {
             
-            int x = 0;
-            int y = 0;
+            int x;
+            int y;
             Random rnd = new Random();
             while (true)
             {
                 x = rnd.Next(0, 20);
                 y = rnd.Next(0, 20);
-                if (isCellEmpty(new Coordinates(x, y)))
+                if (IsCellEmpty(new Coordinates(x, y)))
                 {
                     break;
                 }
             }
-            List<Point> posibleRockLocations = getSurroundingCells(new Point(x, y), 3);
+            List<Point> posibleRockLocations = GetSurroundingCells(new Point(x, y), 3);
             foreach (Point element in  posibleRockLocations)
             {
                 if(rnd.Next(0, 2) == 1)
@@ -219,7 +222,7 @@ namespace TowerDefense.ViewModel
             }
         }
 
-        public List<Point> getSurroundingCells(Point fromLocation, int Distance)
+        public List<Point> GetSurroundingCells(Point fromLocation, int Distance)
         {
 
             var nearbySpots = new List<Point>();
@@ -277,7 +280,7 @@ namespace TowerDefense.ViewModel
                 }
             }
         }
-        public bool isCellEmpty(Coordinates coordinates)
+        public bool IsCellEmpty(Coordinates coordinates)
         {
             foreach (Coordinates routeCords in positionRoute)
             {
@@ -302,11 +305,11 @@ namespace TowerDefense.ViewModel
             }
             return true;
         }
-        public void placeTower(TowerModel tower)
+        public void PlaceTower(TowerModel tower)
         {
             if(PlayerData.Coins >= 5 * (ActiveTowers.Count + 1))
             {
-                if (isCellEmpty(tower.Cordinate))
+                if (IsCellEmpty(tower.Cordinate))
                 {
                     activeTowers.Add(tower);
 
@@ -317,6 +320,7 @@ namespace TowerDefense.ViewModel
                     if (PlayerData.Coins < 5 * (ActiveTowers.Count + 1))
                     {
                         placeTowerModeEnabled = false;
+                        towerHover.TowerHoverVisibillity = 0.0;
                     }
                 }
             }
