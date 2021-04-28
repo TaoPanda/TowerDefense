@@ -8,12 +8,12 @@ namespace TowerDefense.Model
     public class PlayerDataModel : INotifyPropertyChanged
     {
         private int hp;
-        private int coins;
+        private double coins;
         private int round;
         private bool canPlaceTower = false;
         private bool popupIsOpen = false;
 
-        public PlayerDataModel(int hp, int coins)
+        public PlayerDataModel(int hp, double coins)
         {
             Hp = hp;
             Coins = coins;
@@ -40,7 +40,18 @@ namespace TowerDefense.Model
                 }
             } 
         }
-        public int Coins { get => coins; set => coins = value; }
+        public double Coins
+        {
+            get => coins;
+            set
+            {
+                if(coins != value)
+                {
+                    coins = value;
+                    RaisePropertyChanged("Coins");
+                }
+            }
+        }
         public int Round { get => round; set => round = value; }
         public bool CanPlaceTower { get => canPlaceTower; set { 
                 if(canPlaceTower != value)
