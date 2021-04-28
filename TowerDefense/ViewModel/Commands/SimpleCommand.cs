@@ -21,9 +21,9 @@ namespace TowerDefense.ViewModel.Commands
 
         public void Execute(object parameter) 
         {
-            this.viewModel.StartGame();
-            this.viewModel.newWave();
-            this.viewModel.PlaceTowerModeEnabled = false;
+            this.ViewModel.StartGame();
+            this.ViewModel.NewWave();
+            this.ViewModel.PlaceTowerModeEnabled = false;
 
         }
 

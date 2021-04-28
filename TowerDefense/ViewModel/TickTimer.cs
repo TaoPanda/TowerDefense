@@ -32,7 +32,7 @@ public class TickTimer
         MapView.MoveEnemyInList();
         MapView.SpawnInterval();
         MapView.TowerTick();
-        MapView.MoveCursor();
+        MapView.moveCursor();
     }
 
         /*

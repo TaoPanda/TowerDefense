@@ -37,7 +37,7 @@ namespace TowerDefense.ViewModel
         private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 1, 1, 1, 1, 1, 1, 1, "blue");
         private TowerModel selectedUITower;
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(100, 5000);
+            PlayerData = new PlayerDataModel(100, 200);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             this.resetGame = new ResetGame(this);
@@ -47,7 +47,6 @@ namespace TowerDefense.ViewModel
             //Adds debug enemy
             //Starts game
             RoutedEvent[] events = EventManager.GetRoutedEvents();
-            Tick.StartGame();
             TowerHover.TowerHoverVisibillity = 0.0;
             for (int i = 0; i < 5; i++)
             {
@@ -77,7 +76,7 @@ namespace TowerDefense.ViewModel
 
         public void StartGame()
         {
-            Tick.startGame();
+            Tick.StartGame();
 
         }
 
