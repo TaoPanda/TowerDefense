@@ -165,26 +165,24 @@ namespace TowerDefense.Model
 
             AttackCount++;
             enemy.Hp -= tower.Dmg;
+            MapView.PlayerData.Coins++;
             
 
             // This is where the image gets changed, the image depends on the health of the enemy
-            if (enemy.Hp <= 75 && enemy.Hp > 50)
+            if (enemy.Hp <= 75 && enemy.Hp > 50 && enemy.Image != break1)
             {
                 enemy.Image = break1;
             }
-            if (enemy.Hp <= 50 && enemy.Hp > 25)
+            if (enemy.Hp <= 50 && enemy.Hp > 25 && enemy.Image != break2)
             {
                 enemy.Image = break2;
             }
-            if (enemy.Hp <= 25)
+            if (enemy.Hp <= 25 && enemy.Image != break3)
             {
                 enemy.Image = break3;
             }
 
-            if(tower.Xp >= tower.Lvl * 35)
-            {
-                tower.Lvl++;
-            }
+            
 
             // Enemy Death Method
             
@@ -194,8 +192,17 @@ namespace TowerDefense.Model
                 // The same with Xp
                 MapView.PlayerData.Coins += Math.Round(MapView.WavesCount*1.25, 2);
                 
-                tower.Xp += Convert.ToInt32(Math.Round(MapView.WavesCount * 1.5));
-                if(tower.Lvl < 5 )
+
+                if (tower.Xp >= tower.Lvl * 5.25)
+                {
+                    tower.Lvl++;
+                }
+                else
+                {
+                tower.Xp += Convert.ToInt32(Math.Round(MapView.WavesCount * 1.1));
+
+                }
+                if (tower.Lvl < 5 )
                 {
                     tower.range = 1;
                 }

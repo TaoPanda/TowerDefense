@@ -163,7 +163,8 @@ namespace TowerDefense.ViewModel
                 Random random = new Random();
                 TotalEnmSpawnTick = random.Next(2, 5);
 
-                activeEnemies.Add(new EnemyModel("test", 100, 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri("/images/notBroken.png", UriKind.Relative))));
+                activeEnemies.Add(new EnemyModel("test", (100 + WavesCount*2), 1, 1, 1, "red", positionRoute[0], new BitmapImage(new Uri("/images/notBroken.png", UriKind.Relative))));
+                Debug.WriteLine(activeEnemies[activeEnemies.Count - 1].Hp);
                 RemainingEnmSpawnTick = 0;
                 enemiesThisWave--;
 
