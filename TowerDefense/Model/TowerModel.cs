@@ -60,7 +60,15 @@ namespace TowerDefense.Model
         public int Dmg { get => dmg; set => dmg = value; }
         public int Fr { get => fr; set => fr = value; }
         public int Cost { get => cost; set => cost = value; }
-        public int Lvl { get => lvl; set => lvl = value; }
+        public int Lvl { get => lvl; set
+            { 
+                if(lvl != value)
+                {
+                    lvl = value;
+                    RaisePropertyChanged("Lvl");
+                }
+            }
+        }
         public int Xp
         {
             get => xp; set
@@ -184,7 +192,7 @@ namespace TowerDefense.Model
                 tower.Xp += Convert.ToInt32(Math.Round(MapView.WavesCount * 1.5));
                 if(tower.Lvl < 5 )
                 {
-                    tower.range = 1;
+                    tower.range = 2;
                 }
                 else if(tower.Lvl >= 5 && tower.Lvl < 20)
                 {

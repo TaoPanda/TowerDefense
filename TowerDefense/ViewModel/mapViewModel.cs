@@ -8,6 +8,8 @@ using System.Windows.Input;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Diagnostics;
+
 namespace TowerDefense.ViewModel
 {
     public class MapViewModel
@@ -35,7 +37,7 @@ namespace TowerDefense.ViewModel
         private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 1, 1, 1, 1, 1, 1, 1, "blue");
       
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(100, 0);
+            PlayerData = new PlayerDataModel(100, 50);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             this.resetGame = new ResetGame(this);
@@ -153,7 +155,7 @@ namespace TowerDefense.ViewModel
 
             }
             RemainingEnmSpawnTick++;
-            if (activeEnemies.Count == 0)
+            if (activeEnemies.Count == 0 && PlayerData.Coins >= 5 * (ActiveTowers.Count + 1))
             {
                 playerData.CanPlaceTower = true;
             }
@@ -239,9 +241,21 @@ namespace TowerDefense.ViewModel
         }
         public void placeTower(TowerModel tower)
         {
-            if (isCellEmpty(tower.Cordinate))
+            if(PlayerData.Coins >= 5 * (ActiveTowers.Count + 1))
             {
-                activeTowers.Add(tower);
+                if (isCellEmpty(tower.Cordinate))
+                {
+                    activeTowers.Add(tower);
+
+                    // When you buy a tower you lose coins
+                    PlayerData.Coins -= 5 * (ActiveTowers.Count+1);
+
+                    // So when you place/buy a tower it check if you have enought coins to buy/place one more, if not then placeTowerModeEnabled is equal to false
+                    if (PlayerData.Coins < 5 * (ActiveTowers.Count + 1))
+                    {
+                        placeTowerModeEnabled = false;
+                    }
+                }
             }
         }
 
