@@ -62,8 +62,10 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas>
-                        <TextBlock MouseEnter="ItemsControl_MouseEnter" FontSize="40" Text="{Binding Lvl, UpdateSourceTrigger=PropertyChanged}" Tag="{Binding Id}"></TextBlock>
+                        <TextBlock  FontSize="40" Text="{Binding Lvl, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock
+                            Tag="{Binding Id}"
+                            MouseEnter="ItemsControl_MouseEnter"
                             Width="25"
                             Height="25"
                             Background="Blue"

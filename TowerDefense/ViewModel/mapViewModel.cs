@@ -37,7 +37,7 @@ namespace TowerDefense.ViewModel
         private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 1, 1, 1, 1, 1, 1, 1, "blue");
         private TowerModel selectedUITower;
         public MapViewModel(){
-            PlayerData = new PlayerDataModel(100, 50);
+            PlayerData = new PlayerDataModel(100, 5000);
             this.simpleCommand = new SimpleCommand(this);
             this.towerCommand = new PlaceTowerCommand(this);
             this.resetGame = new ResetGame(this);
@@ -172,7 +172,6 @@ namespace TowerDefense.ViewModel
             {
                 playerData.CanPlaceTower = true;
                 //Husk at implementere visibilitty
-                TowerHover.TowerHoverVisibillity = 0.35;
             }
             else
             {
@@ -314,6 +313,7 @@ namespace TowerDefense.ViewModel
                     if (PlayerData.Coins < 5 * (ActiveTowers.Count + 1))
                     {
                         placeTowerModeEnabled = false;
+                        towerHover.TowerHoverVisibillity = 0.0;
                     }
                 }
             }

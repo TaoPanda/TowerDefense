@@ -60,6 +60,7 @@ namespace TowerDefense.View
                 testTower.Cordinate = new Coordinates(pX, pY);
                 MapView.SelectedTower = testTower;
                 MapView.PlaceTower(testTower);
+                towerId++;
             }
             else
             {
