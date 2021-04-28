@@ -14,7 +14,6 @@ namespace TowerDefense.ViewModel
 {
     public class MapViewModel
     {
-        private ObservableCollection<string> test = new ObservableCollection<string>();
         private int wavesCount = 0;
         private int enemiesThisWave = 5;
         private int TotalEnmSpawnTick = 0;
@@ -25,7 +24,7 @@ namespace TowerDefense.ViewModel
         private ObservableCollection<string> Route = new ObservableCollection<string>();
         private ObservableCollection<Coordinates> positionRoute = new ObservableCollection<Coordinates>();
         private ViewVisibillityModel towerHover = new ViewVisibillityModel();
-        private TickTimer Tick;
+        private readonly TickTimer Tick;
         private PlayerDataModel playerData;
         private SimpleCommand simpleCommand;
         private ResetGame resetGame;
@@ -184,8 +183,8 @@ namespace TowerDefense.ViewModel
         private void GenerateRockFormations()
         {
             
-            int x = 0;
-            int y = 0;
+            int x;
+            int y;
             Random rnd = new Random();
             while (true)
             {

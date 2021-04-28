@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 public class TickTimer
 {
-	private DispatcherTimer timer = new DispatcherTimer();
-    private MapViewModel MapView;
+	private readonly DispatcherTimer timer = new DispatcherTimer();
+    private readonly MapViewModel MapView;
     public TickTimer(MapViewModel mapViewModel)
     {
         MapView = mapViewModel;
