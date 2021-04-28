@@ -111,7 +111,7 @@ namespace TowerDefense.ViewModel
             activeTowers.Clear();
             PlayerData.Hp = 100;
             PlayerData.Round = 0;
-            PlayerData.Coins = 0;
+            PlayerData.Coins = 10;
             RemainingEnmSpawnTick = 0;
             TotalEnmSpawnTick = 0;
             PlayerData.PopupIsOpen = false;
