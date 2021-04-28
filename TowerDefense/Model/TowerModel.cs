@@ -66,6 +66,7 @@ namespace TowerDefense.Model
         public int Cost { get => cost; set => cost = value; }
         public int Lvl { get => lvl; set
             {
+            
                 if(lvl != value)
                 {
                     lvl = value;
@@ -189,6 +190,10 @@ namespace TowerDefense.Model
             
             if(enemy.Hp <= 0)
             {
+                // Here is where i define if enemy health is lower or equal to 0 then give coins
+                // The same with Xp
+                MapView.PlayerData.Coins += Math.Round(MapView.WavesCount*1.25, 2);
+                
                 tower.Xp += Convert.ToInt32(Math.Round(MapView.WavesCount * 1.5));
                 if(tower.Lvl < 5 )
                 {
