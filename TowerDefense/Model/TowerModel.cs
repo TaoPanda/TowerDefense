@@ -42,6 +42,10 @@ namespace TowerDefense.Model
             this.size = size;
             this.color = color;
         }
+        public TowerModel()
+        {
+
+        }
 
         [Key]
         public int Id { get => id; set => id = value; }
@@ -61,7 +65,8 @@ namespace TowerDefense.Model
         public int Fr { get => fr; set => fr = value; }
         public int Cost { get => cost; set => cost = value; }
         public int Lvl { get => lvl; set
-            { 
+            {
+            
                 if(lvl != value)
                 {
                     lvl = value;

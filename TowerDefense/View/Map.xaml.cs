@@ -20,6 +20,10 @@ namespace TowerDefense.View
     /// </summary>
     public partial class Map : UserControl
     {
+        private int towerId = 0;
+
+        public int TowerId { get => towerId; set => towerId = value; }
+
         public Map()
         {
             InitializeComponent();
@@ -50,7 +54,7 @@ namespace TowerDefense.View
             if (MapView.PlaceTowerModeEnabled)
             {
                 Point position = Mouse.GetPosition(myCanvas);
-                TowerModel testTower = new TowerModel(1, "test", 1, 5, 1, 1, 1, 1, 1, "blue");
+                TowerModel testTower = new TowerModel(towerId + 1, "test", 1, 5, 1, 1, 1, 1, 1, "blue");
                 int pX = (int)Math.Round(position.X / 25.0) * 25;
                 int pY = (int)Math.Round(position.Y / 25.0) * 25;
                 testTower.Cordinate = new Coordinates(pX, pY);
@@ -63,6 +67,18 @@ namespace TowerDefense.View
             }
         }
 
+        private void ItemsControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            int id = Convert.ToInt32((sender as Rectangle).Tag);
+            MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
+            foreach (TowerModel tower in MapView.ActiveTowers)
+            {
+                if(tower.Id == id)
+                {
+                    MapView.TowerHover.SelectedUiModel = tower;
+                }
+            }
+        }
     }
 
 }

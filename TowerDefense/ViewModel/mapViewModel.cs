@@ -36,6 +36,7 @@ namespace TowerDefense.ViewModel
         private bool placeTowerModeEnabled = false;
         private ObservableCollection<EnemyModel> enemiesToKill = new ObservableCollection<EnemyModel>();
         private TowerModel selectedTower = new TowerModel(1, "debugRangeSystem", 1, 1, 1, 1, 1, 1, 1, "blue");
+        private TowerModel selectedUITower;
         public MapViewModel(){
             PlayerData = new PlayerDataModel(100, 50);
             this.simpleCommand = new SimpleCommand(this);
@@ -73,6 +74,7 @@ namespace TowerDefense.ViewModel
         public ViewVisibillityModel TowerHover { get => towerHover; set => towerHover = value; }
         public TowerModel SelectedTower { get => selectedTower; set => selectedTower = value; }
         public int WavesCount { get => wavesCount; set => wavesCount = value; }
+        public TowerModel SelectedUITower { get => selectedUITower; set => selectedUITower = value; }
 
         public void moveCursor()
         {

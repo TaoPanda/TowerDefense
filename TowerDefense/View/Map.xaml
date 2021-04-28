@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TowerDefense.View"
       xmlns:viewModel = "clr-namespace:TowerDefense.ViewModel" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+      xmlns:model="clr-namespace:TowerDefense.Model"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
       mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300"
       DataContext="{StaticResource sharedMapViewModel}">
 
@@ -57,11 +58,22 @@
                 </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <ItemsControl ItemsSource = "{Binding Path = ActiveTowers}">
+        <ItemsControl ItemsSource = "{Binding Path = ActiveTowers}"  >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas>
-
+                        <Rectangle
+                            
+                            MouseEnter="ItemsControl_MouseEnter"
+                        Width="25"
+                        Height="25"
+                        Fill="Blue"
+                        Tag="{Binding Id}"
+                        Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged}"
+                        Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged}"    >
+                           
+                        </Rectangle>
+                        <TextBlock FontSize="40" Text="{Binding Lvl, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock
                             Width="25"
                             Height="25"
@@ -73,7 +85,7 @@
                             FontSize="24"
                             TextAlignment="Center"
                             LineHeight="auto"
-                        />
+                        
 
 
                     </Canvas>
