@@ -10,7 +10,7 @@
       mc:Ignorable = "d" d:DesignHeight = "300" d:DesignWidth = "300"
       DataContext="{StaticResource sharedMapViewModel}">
 
-    <Canvas x:Name="myCanvas"  MouseLeftButtonDown="callViewmodelFunction">
+    <Canvas x:Name="myCanvas"  MouseLeftButtonDown="CallViewmodelFunction">
 
         <Popup Margin="10,10,0,13" Name="Popup1" Width="194" Height="75" IsOpen="{Binding PlayerData.PopupIsOpen, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="770" Canvas.Top="332" Placement="Center">
             <Border BorderBrush="Black" BorderThickness="2">
@@ -62,18 +62,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Canvas>
-                        <Rectangle
-                            
-                            MouseEnter="ItemsControl_MouseEnter"
-                        Width="25"
-                        Height="25"
-                        Fill="Blue"
-                        Tag="{Binding Id}"
-                        Canvas.Left="{Binding Cordinate.X,  UpdateSourceTrigger=PropertyChanged}"
-                        Canvas.Top="{Binding Cordinate.Y,  UpdateSourceTrigger=PropertyChanged}"    >
-                           
-                        </Rectangle>
-                        <TextBlock FontSize="40" Text="{Binding Lvl, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <TextBlock MouseEnter="ItemsControl_MouseEnter" FontSize="40" Text="{Binding Lvl, UpdateSourceTrigger=PropertyChanged}" Tag="{Binding Id}"></TextBlock>
                         <TextBlock
                             Width="25"
                             Height="25"
@@ -85,8 +74,7 @@
                             FontSize="24"
                             TextAlignment="Center"
                             LineHeight="auto"
-                        
-
+                        />
 
                     </Canvas>
                     

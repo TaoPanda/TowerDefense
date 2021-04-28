@@ -48,7 +48,7 @@ namespace TowerDefense.View
             }
         }
         
-        private void callViewmodelFunction(object sender, MouseButtonEventArgs e)
+        private void CallViewmodelFunction(object sender, MouseButtonEventArgs e)
         {
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
             if (MapView.PlaceTowerModeEnabled)
@@ -59,7 +59,7 @@ namespace TowerDefense.View
                 int pY = (int)Math.Round(position.Y / 25.0) * 25;
                 testTower.Cordinate = new Coordinates(pX, pY);
                 MapView.SelectedTower = testTower;
-                MapView.placeTower(testTower);
+                MapView.PlaceTower(testTower);
             }
             else
             {
@@ -69,7 +69,7 @@ namespace TowerDefense.View
 
         private void ItemsControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            int id = Convert.ToInt32((sender as Rectangle).Tag);
+            int id = Convert.ToInt32((sender as TextBlock).Tag);
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
             foreach (TowerModel tower in MapView.ActiveTowers)
             {

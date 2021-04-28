@@ -17,13 +17,13 @@ public class TickTimer
     }
 
 
-    public void startGame()
+    public void StartGame()
     {
 		timer.Interval = TimeSpan.FromMilliseconds(200);
 		timer.Tick += Timer_Tick;
 		timer.Start();
 	}
-    public void gameOver()
+    public void GameOver()
     {
         timer.Stop();
     }
@@ -32,7 +32,7 @@ public class TickTimer
         MapView.MoveEnemyInList();
         MapView.SpawnInterval();
         MapView.TowerTick();
-        MapView.moveCursor();
+        MapView.MoveCursor();
     }
 
         /*

@@ -121,7 +121,7 @@ namespace TowerDefense.Model
         }
         */
 
-        public void checkRange(TowerModel tower)
+        public void CheckRange(TowerModel tower)
         {
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
             foreach (EnemyModel enemy in MapView.ActiveEnemies)
@@ -131,7 +131,7 @@ namespace TowerDefense.Model
                    enemy.Cordinate.X / 25 <= ((cordinate.X / 25) + range) &&
                    enemy.Cordinate.Y / 25 <= ((cordinate.Y / 25) + range))
                 {
-                    attack(enemy, tower);
+                    Attack(enemy, tower);
                     Debug.WriteLine(tower.Lvl);
                 }
                 /*
@@ -150,7 +150,7 @@ namespace TowerDefense.Model
             }
         }
 
-        public void attack(EnemyModel enemy, TowerModel tower)
+        public void Attack(EnemyModel enemy, TowerModel tower)
         {
             MapViewModel MapView = (MapViewModel)App.Current.Resources["sharedMapViewModel"];
             // Kinda Fields i think
@@ -220,11 +220,7 @@ namespace TowerDefense.Model
 
         private void RaisePropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

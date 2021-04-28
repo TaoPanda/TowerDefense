@@ -7,11 +7,11 @@ namespace TowerDefense.ViewModel.Commands
 {
     public class ResetGame : ICommand
     {
-        public MapViewModel viewModel { get; set; }
+        public MapViewModel ViewModel { get; set; }
 
         public ResetGame(MapViewModel viewModel)
         {
-            this.viewModel = viewModel;
+            this.ViewModel = viewModel;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -23,7 +23,7 @@ namespace TowerDefense.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            this.viewModel.GameOver();
+            this.ViewModel.GameOver();
         }
     }
 }

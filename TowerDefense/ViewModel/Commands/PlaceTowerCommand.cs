@@ -7,11 +7,11 @@ namespace TowerDefense.ViewModel.Commands
 {
     public class PlaceTowerCommand : ICommand
     {
-        public MapViewModel viewModel { get; set; }
+        public MapViewModel ViewModel { get; set; }
 
         public PlaceTowerCommand(MapViewModel mapViewModel)
         {
-            this.viewModel = mapViewModel;
+            this.ViewModel = mapViewModel;
         }
         public event EventHandler CanExecuteChanged;
 
@@ -22,14 +22,14 @@ namespace TowerDefense.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            if (this.viewModel.PlaceTowerModeEnabled)
+            if (this.ViewModel.PlaceTowerModeEnabled)
             {
-                this.viewModel.PlaceTowerModeEnabled = false;
+                this.ViewModel.PlaceTowerModeEnabled = false;
             }
             else
             {
-                this.viewModel.PlaceTowerModeEnabled = true;
-                this.viewModel.TowerHover.TowerHoverVisibillity = 0.35;
+                this.ViewModel.PlaceTowerModeEnabled = true;
+                this.ViewModel.TowerHover.TowerHoverVisibillity = 0.35;
             }
         }
 
